@@ -11,7 +11,8 @@ class CcalgraphyDlg : public CDialogEx
 // 构造
 public:
 	CcalgraphyDlg(CWnd* pParent = nullptr);	// 标准构造函数
-
+	void ShowHide(int);
+//郭必然提议定义一个函数减少工作量
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_CAL_GRAPHY_DIALOG };
@@ -57,4 +58,7 @@ public:
 	CEdit y4;
 	CEdit show_result;
 	afx_msg void OnBnClickedButton7();
+	afx_msg void OnCbnSelchangeCombo3();
+	CComboBox combox3;
 };
+

@@ -7,6 +7,7 @@
 #include "cal_graphy.h"
 #include "cal_graphyDlg.h"
 #include "afxdialogex.h"
+#include"experiment_2.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -69,6 +70,7 @@ void CcalgraphyDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT5, x4);
 	DDX_Control(pDX, IDC_EDIT9, y4);
 	DDX_Control(pDX, IDC_EDIT1, show_result);
+	DDX_Control(pDX, IDC_COMBO3, combox3);
 }
 
 BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
@@ -88,6 +90,7 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON1, &CcalgraphyDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON8, &CcalgraphyDlg::OnBnClickedButton8)
 	ON_BN_CLICKED(IDC_BUTTON7, &CcalgraphyDlg::OnBnClickedButton7)
+	ON_CBN_SELCHANGE(IDC_COMBO3, &CcalgraphyDlg::OnCbnSelchangeCombo3)
 END_MESSAGE_MAP()
 
 
@@ -102,6 +105,9 @@ BOOL CcalgraphyDlg::OnInitDialog()
 	combox1.InsertString(1,_T("平行四边形"));
 	combox1.InsertString(2,_T("圆"));
 	combox1.InsertString(3,_T("圆弧"));
+	combox3.InsertString(0, _T("厘米"));
+	combox3.InsertString(1, _T("毫米"));
+	combox3.InsertString(2, _T("米"));
 	// IDM_ABOUTBOX 必须在系统命令范围内。
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
@@ -395,5 +401,11 @@ void CcalgraphyDlg::OnBnClickedButton7()
 	{
 		exit(0);
 	}
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CcalgraphyDlg::OnCbnSelchangeCombo3()
+{
 	// TODO: 在此添加控件通知处理程序代码
 }
