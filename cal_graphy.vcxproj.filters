@@ -13,36 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\界面">
+      <UniqueIdentifier>{bea3d1ec-7e2e-4ae1-8a1c-95e89452523e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\界面">
+      <UniqueIdentifier>{7a56ae03-0542-493d-91bb-a9d251595c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\系统内部">
+      <UniqueIdentifier>{35e1e3ae-715f-47e2-ae5c-c610566d776f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\系统内部">
+      <UniqueIdentifier>{d31f359b-3ef1-482a-b34f-910af8a8c92c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cal_graphy.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\界面</Filter>
     </ClInclude>
     <ClInclude Include="cal_graphyDlg.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\界面</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\界面</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\界面</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件\界面</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件\界面</Filter>
+    </ClInclude>
+    <ClInclude Include="experiment_2.h">
+      <Filter>头文件\系统内部</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cal_graphy.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\界面</Filter>
     </ClCompile>
     <ClCompile Include="cal_graphyDlg.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\界面</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\界面</Filter>
+    </ClCompile>
+    <ClCompile Include="experiment_2.cpp">
+      <Filter>源文件\系统内部</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +73,7 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="resource.hm">
-      <Filter>头文件</Filter>
+      <Filter>头文件\界面</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
