@@ -19,7 +19,6 @@ class CcalgraphyApp : public CWinApp
 {
 public:
 	CcalgraphyApp();
-
 // 重写
 public:
 	virtual BOOL InitInstance();
