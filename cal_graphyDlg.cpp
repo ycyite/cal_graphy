@@ -26,6 +26,11 @@ CString X1=_T("");
 CString Y1=_T("");
 CString X2=_T("");
 CString Y2=_T("");
+CString X3 = _T("");
+CString Y3 = _T("");
+CString X4 = _T("");
+CString Y4 = _T("");
+CString unit1=_T("");
 int n1;
 int n2;
 
@@ -232,12 +237,12 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 		SetDlgItemText(IDC_P4, _T("第四个点："));
 		SetDlgItemText(IDC_BUTTON1, _T("面积"));
 		SetDlgItemText(IDC_BUTTON8, _T("周长"));
+		SetDlgItemText(IDC_P5, _T("注意事项:\n1.请输入两位小数的数字\n2.请按顺时针输入平行四边形坐标"));
 	}
 	else if (n1 == 2)
 	{
 		ShowHide(5, 0, 0, 0, 0, 0, 5, 5);
 		GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
-		GetDlgItem(IDC_BUTTON4)->ShowWindow(SW_SHOW);
 		GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
 		SetDlgItemText(IDC_P1, _T("第一个点："));
 		SetDlgItemText(IDC_P2, _T("半径："));
@@ -253,8 +258,6 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 		GetDlgItem(IDC_P1)->ShowWindow(SW_SHOW);
 		GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
 		GetDlgItem(IDC_P3)->ShowWindow(SW_SHOW);
-		GetDlgItem(IDC_BUTTON4)->ShowWindow(SW_SHOW);
-		GetDlgItem(IDC_BUTTON5)->ShowWindow(SW_SHOW);
 		SetDlgItemText(IDC_P1, _T("第一个点："));
 		SetDlgItemText(IDC_P2, _T("半径："));
 		SetDlgItemText(IDC_P3, _T("角度："));
@@ -319,14 +322,13 @@ void CcalgraphyDlg::OnEnChangeEdit9()
 
 void CcalgraphyDlg::OnBnClickedButton1()
 {
-	x_1.GetWindowTextW(X1);
-	x_2.GetWindowTextW(X2);
-	y_1.GetWindowTextW(Y1);
-	y_2.GetWindowTextW(Y2);
 	CString result=_T("");
-	n1 = combox1.GetCurSel();
 	if (n1 == 0)
 	{
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
 		if (X1 == _T("") || Y1 == _T("") || X2 == _T("") || Y2 == _T(""))
 		{
 			MessageBox(_T("请完整输入坐标内容"), _T("警告"),MB_OK);
@@ -341,19 +343,68 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			line lin1(x11, y11, x22, y22);
 			if (n2 == 0)
 			{
-				result.Format(_T("线段长度为%f厘米"), lin1.length());
+				unit1 = "厘米";
 			}
 			else if (n2 == 1)
 			{
-				result.Format(_T("线段长度为%f毫米"), lin1.length());
+				unit1 = "毫米";
 			}
 			else if (n2 == 2)
 			{
-				result.Format(_T("线段长度为%f米"), lin1.length());
+				unit1 = "米";
 			}
+			result.Format(_T("线段长度为%f%s"), lin1.length(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 
+	}
+	else if (n1 == 1)
+	{
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
+		{
+			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
+		}
+		else
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			x33 = _ttof(X3);
+			y33 = _ttof(Y3);
+			x44 = _ttof(X4);
+			y44 = _ttof(Y4);
+			parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
+			if (pall.judge())
+			{
+				if (n2 == 0)
+				{
+					unit1 = "平方厘米";
+				}
+				else if (n2 == 1)
+				{
+					unit1 = "平方毫米";
+				}
+				else if (n2 == 2)
+				{
+					unit1 = "平方米";
+				}
+				result.Format(_T("平行四边形面积为%f%s"), pall.area(), unit1);
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+			{
+				MessageBox(_T("你输入的坐标构不成平行四边形"), _T("警告"), MB_OK);
+			}
+		}
 	}
 
 	// TODO: 在此添加控件通知处理程序代码
@@ -364,6 +415,55 @@ void CcalgraphyDlg::OnBnClickedButton1()
 
 void CcalgraphyDlg::OnBnClickedButton8()
 {
+	CString result = _T("");
+	if (n1 == 1)
+	{
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
+		{
+			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
+		}
+		else
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			x33 = _ttof(X3);
+			y33 = _ttof(Y3);
+			x44 = _ttof(X4);
+			y44 = _ttof(Y4);
+			parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
+			if (pall.judge())
+			{
+				if (n2 == 0)
+				{
+					unit1 = "厘米";
+				}
+				else if (n2 == 1)
+				{
+					unit1 = "毫米";
+				}
+				else if (n2 == 2)
+				{
+					unit1 = "米";
+				}
+				result.Format(_T("平行四边形周长为%f%s"), pall.length(), unit1);
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+			{
+				MessageBox(_T("你输入的坐标构不成平行四边形"), _T("警告"), MB_OK);
+			}
+		}
+	}
 	// TODO: 在此添加控件通知处理程序代码
 }
 

@@ -50,7 +50,7 @@ parallelogram::parallelogram(double a1, double b1, double a2, double b2, double 
 }
 bool parallelogram::judge()
 {
-	if ((x3 - x4) == (x5 - x6) && (y3 - y4) == (y5 - y6))
+	if ((x3 - x4) == (x6 - x5) && (y3 - y4) == (y6 - y5))
 		return true;
 	else
 		return false;
@@ -59,17 +59,17 @@ double parallelogram::length()const
 {
 	double a, b;
 	a = sqrt(pow((x3 - x4), 2) + pow((y3 - y4), 2));
-	b = sqrt(pow((x3 - x5), 2) + pow((y3 - y5), 2));
+	b = sqrt(pow((x4 - x5), 2) + pow((y4 - y5), 2));
 	return (a + b) * 2;
 }
 double parallelogram::area()const
 {
-	double a, h, s, A, B;
+	double p, a, b, c, s;
 	a = sqrt(pow((x3 - x4), 2) + pow((y3 - y4), 2));
-	A = fabs((x5 - x3) / (x4 - x3));
-	B = -1;
-	h = fabs(fabs(A * (x5 - x4) + y4 - y5) / sqrt(pow(A, 2) + pow(B, 2)));
-	s = a * h;
+	b = sqrt(pow((x3 - x5), 2) + pow((y3 - y5), 2));
+	c = sqrt(pow((x4 - x5), 2) + pow((y4 - y5), 2));
+	p = (a + b + c) / 2;
+	s = 2 * sqrt(p*(p - a)*(p - b)*(p - c));
 	return s;
 }
 parallelogram::~parallelogram()
