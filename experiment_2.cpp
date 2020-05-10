@@ -3,13 +3,21 @@
 #include<cmath>
 #include"experiment_2.h"
 using namespace std;
-Point::Point(double a, double b)
+Point::Point()
 {
-	x = a;
-	y = b;
+	x = 0;
+	y = 0;
 }
 Point::~Point()
 {
+}
+inline void Point::setX(double a)
+{
+	x = a;
+}
+inline void Point::setY(double b)
+{
+	y = b;
 }
 inline line::line(double a, double b, double c, double d)
 {
@@ -39,6 +47,13 @@ parallelogram::parallelogram(double a1, double b1, double a2, double b2, double 
 	y4 = b2;
 	y5 = b3;
 	y6 = b4;
+}
+bool parallelogram::judge()
+{
+	if ((x3 - x4) == (x5 - x6) && (y3 - y4) == (y5 - y6))
+		return true;
+	else
+		return false;
 }
 double parallelogram::length()const
 {

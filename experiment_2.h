@@ -1,5 +1,4 @@
 #pragma once
-#include"pch.h"
 #include<iostream>
 using namespace std;
 #include<string>
@@ -13,7 +12,7 @@ public:
 class Point//定义Shape的派生类Point
 {
 public:
-	Point(double = 0, double = 0);//定义构造函数
+	Point();//定义构造函数
 	double getX()const
 	{
 		return x;
@@ -22,11 +21,13 @@ public:
 	{
 		return y;
 	}//获取Y坐标的函数
+	void setX(double);
+	void setY(double);
 	~Point();//定义析构函数
 	double x;
 	double y;
 };
-class line :public Point//定义Point的派生类line
+class line :public Point,public Shape//定义Point的派生类line
 {
 protected:
 	double x1;
@@ -57,7 +58,7 @@ public:
 	bool judge();//声明判断是否构成平行四边形的函数，如果是则返还真值，如果不是则返还假
 	~parallelogram();//定义析构函数
 };
-class Circle :public Point//定义Point的派生类Circle
+class Circle :public Point,public Shape//定义Point的派生类Circle
 {
 protected:
 	double y7;

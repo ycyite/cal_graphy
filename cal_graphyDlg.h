@@ -4,7 +4,6 @@
 
 #pragma once
 
-
 // CcalgraphyDlg 对话框
 class CcalgraphyDlg : public CDialogEx
 {
@@ -42,20 +41,18 @@ public:
 	afx_msg void OnEnChangeEdit9();
 	
 	CEdit x3;
-	afx_msg void OnBnClickedButton3();
-	afx_msg void OnBnClickedButton4();
-	afx_msg void OnBnClickedButton5();
-	afx_msg void OnBnClickedButton6();
+	
 	afx_msg void OnBnClickedButton1();
 	
 	afx_msg void OnBnClickedButton8();
-	CEdit x1;
-	CEdit y1;
-	CEdit x2;
-	CEdit y2;
-	CEdit y3;
-	CEdit x4;
-	CEdit y4;
+	CEdit x_1;
+	CEdit y_1;
+	CEdit x_2;
+	CEdit y_2;
+	CEdit x_3;
+	CEdit y_3;
+	CEdit x_4;
+	CEdit y_4;
 	CEdit show_result;
 	afx_msg void OnBnClickedButton7();
 	afx_msg void OnCbnSelchangeCombo3();

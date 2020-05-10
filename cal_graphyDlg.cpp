@@ -12,7 +12,22 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
+double x11=0;
+double x22=0;
+double x33=0;
+double x44=0;
+double y11=0;
+double y22=0;
+double y33=0;
+double y44=0;
+double r1 = 0;
+double arc = 0;
+CString X1=_T("");
+CString Y1=_T("");
+CString X2=_T("");
+CString Y2=_T("");
+int n1;
+int n2;
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
@@ -61,14 +76,14 @@ void CcalgraphyDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_COMBO1, combox1);
-	DDX_Control(pDX, IDC_EDIT4, x3);
-	DDX_Control(pDX, IDC_EDIT2, x1);
-	DDX_Control(pDX, IDC_EDIT6, y1);
-	DDX_Control(pDX, IDC_EDIT3, x2);
-	DDX_Control(pDX, IDC_EDIT7, y2);
-	DDX_Control(pDX, IDC_EDIT8, y3);
-	DDX_Control(pDX, IDC_EDIT5, x4);
-	DDX_Control(pDX, IDC_EDIT9, y4);
+	DDX_Control(pDX, IDC_EDIT4, x_3);
+	DDX_Control(pDX, IDC_EDIT2, x_1);
+	DDX_Control(pDX, IDC_EDIT6, y_1);
+	DDX_Control(pDX, IDC_EDIT3, x_2);
+	DDX_Control(pDX, IDC_EDIT7, y_2);
+	DDX_Control(pDX, IDC_EDIT8, y_3);
+	DDX_Control(pDX, IDC_EDIT5, x_4);
+	DDX_Control(pDX, IDC_EDIT9, y_4);
 	DDX_Control(pDX, IDC_EDIT1, show_result);
 	DDX_Control(pDX, IDC_COMBO3, combox3);
 }
@@ -83,10 +98,7 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_EN_CHANGE(IDC_EDIT8, &CcalgraphyDlg::OnEnChangeEdit8)
 	ON_EN_CHANGE(IDC_EDIT9, &CcalgraphyDlg::OnEnChangeEdit9)
 
-	ON_BN_CLICKED(IDC_BUTTON3, &CcalgraphyDlg::OnBnClickedButton3)
-	ON_BN_CLICKED(IDC_BUTTON4, &CcalgraphyDlg::OnBnClickedButton4)
-	ON_BN_CLICKED(IDC_BUTTON5, &CcalgraphyDlg::OnBnClickedButton5)
-	ON_BN_CLICKED(IDC_BUTTON6, &CcalgraphyDlg::OnBnClickedButton6)
+	
 	ON_BN_CLICKED(IDC_BUTTON1, &CcalgraphyDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON8, &CcalgraphyDlg::OnBnClickedButton8)
 	ON_BN_CLICKED(IDC_BUTTON7, &CcalgraphyDlg::OnBnClickedButton7)
@@ -104,13 +116,6 @@ BOOL CcalgraphyDlg::OnInitDialog()
 	CDialogEx::OnInitDialog();
 
 	// 将“关于...”菜单项添加到系统菜单中。
-	combox1.InsertString(0,_T("线段"));
-	combox1.InsertString(1,_T("平行四边形"));
-	combox1.InsertString(2,_T("圆"));
-	combox1.InsertString(3,_T("圆弧"));
-	combox3.InsertString(0, _T("厘米"));
-	combox3.InsertString(1, _T("毫米"));
-	combox3.InsertString(2, _T("米"));
 	// IDM_ABOUTBOX 必须在系统命令范围内。
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
@@ -135,7 +140,13 @@ BOOL CcalgraphyDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	// TODO: 在此添加额外的初始化代码
-
+	combox1.InsertString(0, _T("线段"));
+	combox1.InsertString(1, _T("平行四边形"));
+	combox1.InsertString(2, _T("圆"));
+	combox1.InsertString(3, _T("圆弧"));
+	combox3.InsertString(0, _T("厘米"));
+	combox3.InsertString(1, _T("毫米"));
+	combox3.InsertString(2, _T("米"));
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -192,17 +203,18 @@ HCURSOR CcalgraphyDlg::OnQueryDragIcon()
 
 void CcalgraphyDlg::OnCbnSelchangeCombo1()
 {
-	int n1;
-	n1 = combox1.GetCurSel();
+	n1=combox1.GetCurSel();
+	
 	ShowHide(0, 0, 0, 0, 0, 0, 0, 0);
-	x1.SetWindowTextW(_T(""));
-	x2.SetWindowTextW(_T(""));
-	x3.SetWindowTextW(_T(""));
-	x4.SetWindowTextW(_T(""));
-	y1.SetWindowTextW(_T(""));
-	y2.SetWindowTextW(_T(""));
-	y3.SetWindowTextW(_T(""));
-	y4.SetWindowTextW(_T(""));
+	x_1.SetWindowTextW(_T(""));
+	x_2.SetWindowTextW(_T(""));
+	x_3.SetWindowTextW(_T(""));
+	x_4.SetWindowTextW(_T(""));
+	y_1.SetWindowTextW(_T(""));
+	y_2.SetWindowTextW(_T(""));
+	y_3.SetWindowTextW(_T(""));
+	y_4.SetWindowTextW(_T(""));
+	SetDlgItemText(IDC_EDIT1,_T(""));
 	SetDlgItemText(IDC_P5, _T("注意事项：\n要输入两位小数的数字"));
 	if (n1 == 0)
 	{
@@ -305,38 +317,45 @@ void CcalgraphyDlg::OnEnChangeEdit9()
 	// TODO:  在此添加控件通知处理程序代码
 }
 
-
-
-
-
-void CcalgraphyDlg::OnBnClickedButton3()
-{
-	
-	
-	// TODO: 在此添加控件通知处理程序代码
-}
-
-
-void CcalgraphyDlg::OnBnClickedButton4()
-{
-	// TODO: 在此添加控件通知处理程序代码
-}
-
-
-void CcalgraphyDlg::OnBnClickedButton5()
-{
-	// TODO: 在此添加控件通知处理程序代码
-}
-
-
-void CcalgraphyDlg::OnBnClickedButton6()
-{
-	// TODO: 在此添加控件通知处理程序代码
-}
-
-
 void CcalgraphyDlg::OnBnClickedButton1()
 {
+	x_1.GetWindowTextW(X1);
+	x_2.GetWindowTextW(X2);
+	y_1.GetWindowTextW(Y1);
+	y_2.GetWindowTextW(Y2);
+	CString result=_T("");
+	n1 = combox1.GetCurSel();
+	if (n1 == 0)
+	{
+		if (X1 == _T("") || Y1 == _T("") || X2 == _T("") || Y2 == _T(""))
+		{
+			MessageBox(_T("请完整输入坐标内容"), _T("警告"),MB_OK);
+			show_result.SetWindowTextW(_T(""));
+		}
+		else
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			line lin1(x11, y11, x22, y22);
+			if (n2 == 0)
+			{
+				result.Format(_T("线段长度为%f厘米"), lin1.length());
+			}
+			else if (n2 == 1)
+			{
+				result.Format(_T("线段长度为%f毫米"), lin1.length());
+			}
+			else if (n2 == 2)
+			{
+				result.Format(_T("线段长度为%f米"), lin1.length());
+			}
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+
+	}
+
 	// TODO: 在此添加控件通知处理程序代码
 }
 
@@ -361,7 +380,6 @@ void CcalgraphyDlg::OnBnClickedButton7()
 
 void CcalgraphyDlg::OnCbnSelchangeCombo3()
 {
-	int n2;
 	n2 = combox3.GetCurSel();
 	GetDlgItem(IDC_COMBO1)->ShowWindow(0);
 	if (n2 == 0 || n2 == 1|| n2 == 2)	
@@ -379,22 +397,18 @@ void CcalgraphyDlg::ShowHide(int b, int c, int d, int e, int f, int g, int h,int
 	
 	GetDlgItem(IDC_EDIT2)->ShowWindow(b);
 	GetDlgItem(IDC_EDIT6)->ShowWindow(b);
-	GetDlgItem(IDC_BUTTON3)->ShowWindow(b);
 	GetDlgItem(IDC_P1)->ShowWindow(b);
 	//
 	GetDlgItem(IDC_EDIT3)->ShowWindow(c);
 	GetDlgItem(IDC_EDIT7)->ShowWindow(c);
 	GetDlgItem(IDC_P2)->ShowWindow(c);
-	GetDlgItem(IDC_BUTTON4)->ShowWindow(c);
 	//
 	GetDlgItem(IDC_P3)->ShowWindow(d);
 	GetDlgItem(IDC_EDIT4)->ShowWindow(d);
-	GetDlgItem(IDC_BUTTON5)->ShowWindow(d);
 	//
 
 	GetDlgItem(IDC_EDIT5)->ShowWindow(e);
 	GetDlgItem(IDC_P4)->ShowWindow(e);
-	GetDlgItem(IDC_BUTTON6)->ShowWindow(e);
 	//
 	
 	GetDlgItem(IDC_EDIT8)->ShowWindow(f);
