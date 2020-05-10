@@ -70,13 +70,13 @@ public:
 	virtual double area()const;//声明求面积的虚函数，返还面积的数值
 	virtual double length()const;//声明求周长的虚函数，返还周长的数值
 };
-class Arc :public Circle//定义Circle类的派生类Arc
+class Angle :public Circle//定义Circle类的派生类Arc
 {
 private:
 	double angle;
 public:
-	Arc(double=0,double=0, double=0,double=0);//定义构造函数
+	Angle(double=0,double=0, double=0,double=0);//定义构造函数
 	virtual double area()const;//声明求面积的虚函数，返还面积的数值
 	virtual double length()const;//声明求周长的虚函数，返还周长的数值
-	~Arc();//定义析构函数
+	~Angle();//定义析构函数
 };

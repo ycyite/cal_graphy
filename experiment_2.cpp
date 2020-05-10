@@ -93,19 +93,20 @@ inline double Circle::length() const
 {
 	return 2 * PI * radius;
 }
-Arc::Arc(double a,double b,double c,double an):Circle(a,b,c),angle(an)
+Angle::Angle(double a,double b,double c,double an):Circle(a,b,c)
 {	
+	angle = an;
 }
-double Arc::length()const
+double Angle::length()const
 {
-	return (2*radius+radius*angle);
+	return (2*radius+radius*(angle/180)*PI);
 }
-double Arc::area()const
+double Angle::area()const
 {
 	double area;
-	area = radius * radius * angle / 2;
+	area = radius * radius * (angle /180)*PI;
 	return (area);
 }
-Arc::~Arc()//定义析构函数
+Angle::~Angle()//定义析构函数
 {
 }

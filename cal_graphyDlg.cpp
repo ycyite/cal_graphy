@@ -263,7 +263,7 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 		SetDlgItemText(IDC_P3, _T("角度："));
 		SetDlgItemText(IDC_BUTTON1, _T("面积"));
 		SetDlgItemText(IDC_BUTTON8, _T("周长"));
-
+		SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
 
 	}
 	// TODO: 在此添加控件通知处理程序代码
@@ -322,7 +322,7 @@ void CcalgraphyDlg::OnEnChangeEdit9()
 
 void CcalgraphyDlg::OnBnClickedButton1()
 {
-	CString result=_T("");
+	CString result = _T("");
 	if (n1 == 0)
 	{
 		x_1.GetWindowTextW(X1);
@@ -331,7 +331,7 @@ void CcalgraphyDlg::OnBnClickedButton1()
 		y_2.GetWindowTextW(Y2);
 		if (X1 == _T("") || Y1 == _T("") || X2 == _T("") || Y2 == _T(""))
 		{
-			MessageBox(_T("请完整输入坐标内容"), _T("警告"),MB_OK);
+			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
 			show_result.SetWindowTextW(_T(""));
 		}
 		else
@@ -406,6 +406,70 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			}
 		}
 	}
+	else if (n1 == 2)
+	{
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		if (X1 == _T("") || X2 == _T("") || Y1 == _T(""))
+		{
+			MessageBox(_T("请完整输入该输入的内容"), _T("警告"), MB_OK);
+		}
+		else
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			r1 = _ttof(X2);
+			Circle cir1(x11, y11, r1);
+			if (n2 == 0)
+			{
+				unit1 = "平方厘米";
+			}
+			else if (n2 == 1)
+			{
+				unit1 = "平方毫米";
+			}
+			else if (n2 == 2)
+			{
+				unit1 = "平方米";
+			}
+			result.Format(_T("圆的面积为%f%s"), cir1.area(), unit1);
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+	}
+	else if (n1 == 3)
+	{
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		x_3.GetWindowTextW(X3);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || Y1 == _T(""))
+		{
+			MessageBox(_T("请完整输入该输入的内容"), MB_OK);
+		}
+		else
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			r1 = _ttof(X2);
+			arc = _ttof(X3);
+			Angle A1(x11, y11, r1, arc);
+			if (n2 == 0)
+			{
+				unit1 = "平方厘米";
+			}
+			else if (n2 == 1)
+			{
+				unit1 = "平方毫米";
+			}
+			else if (n2 == 2)
+			{
+				unit1 = "平方米";
+			}
+			result.Format(_T("圆弧面积为%f%s"), A1.area(), unit1);
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+	}
 
 	// TODO: 在此添加控件通知处理程序代码
 }
@@ -462,6 +526,70 @@ void CcalgraphyDlg::OnBnClickedButton8()
 			{
 				MessageBox(_T("你输入的坐标构不成平行四边形"), _T("警告"), MB_OK);
 			}
+		}
+	}
+	else if (n1 == 2)
+	{
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		if (X1 == _T("") || X2 == _T("") || Y1 == _T(""))
+		{
+			MessageBox(_T("请完整输入该输入的内容"), _T("警告"), MB_OK);
+		}
+		else
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			r1 = _ttof(X2);
+			Circle cir1(x11, y11, r1);
+			if (n2 == 0)
+			{
+				unit1 = "厘米";
+			}
+			else if (n2 == 1)
+			{
+				unit1 = "毫米";
+			}
+			else if (n2 == 2)
+			{
+				unit1 = "米";
+			}
+			result.Format(_T("圆的周长为%f%s"), cir1.length(), unit1);
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+	}
+	else if (n1 == 3)
+	{
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		x_3.GetWindowTextW(X3);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || Y1 == _T(""))
+		{
+			MessageBox(_T("请完整输入该输入的内容"), MB_OK);
+		}
+		else
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			r1 = _ttof(X2);
+			arc = _ttof(X3);
+		  	Angle A1(x11, y11, r1, arc);
+			if (n2 == 0)
+			{
+				unit1 = "厘米";
+			}
+			else if (n2 == 1)
+			{
+				unit1 = "毫米";
+			}
+			else if (n2 == 2)
+			{
+				unit1 = "米";
+			}
+			result.Format(_T("圆弧周长为%f%s"), A1.length(), unit1);
+			SetDlgItemText(IDC_EDIT1, result);
 		}
 	}
 	// TODO: 在此添加控件通知处理程序代码
