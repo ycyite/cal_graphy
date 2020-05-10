@@ -329,12 +329,13 @@ void CcalgraphyDlg::OnBnClickedButton1()
 		x_2.GetWindowTextW(X2);
 		y_1.GetWindowTextW(Y1);
 		y_2.GetWindowTextW(Y2);
+
 		if (X1 == _T("") || Y1 == _T("") || X2 == _T("") || Y2 == _T(""))
 		{
 			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
 			show_result.SetWindowTextW(_T(""));
 		}
-		else
+		else if(judgenum(X1)&&judgenum(X2)&&judgenum(Y1)&&judgenum(Y2))
 		{
 			x11 = _ttof(X1);
 			x22 = _ttof(X2);
@@ -356,6 +357,8 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			result.Format(_T("线段长度为%f%s"), lin1.length(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
+		else
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
 
 	}
 	else if (n1 == 1)
@@ -372,7 +375,7 @@ void CcalgraphyDlg::OnBnClickedButton1()
 		{
 			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
 		}
-		else
+		else if(judgenum(X1)&&judgenum(X2)&&judgenum(X3)&&judgenum(X4)&&judgenum(Y1)&&judgenum(Y2)&&judgenum(Y3)&&judgenum(Y4))
 		{
 			x11 = _ttof(X1);
 			x22 = _ttof(X2);
@@ -405,6 +408,8 @@ void CcalgraphyDlg::OnBnClickedButton1()
 				MessageBox(_T("你输入的坐标构不成平行四边形"), _T("警告"), MB_OK);
 			}
 		}
+		else
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
 	}
 	else if (n1 == 2)
 	{
@@ -415,7 +420,7 @@ void CcalgraphyDlg::OnBnClickedButton1()
 		{
 			MessageBox(_T("请完整输入该输入的内容"), _T("警告"), MB_OK);
 		}
-		else
+		else if(judgenum(X1)&&judgenum(Y1)&&judgenum(X2))
 		{
 			x11 = _ttof(X1);
 			y11 = _ttof(Y1);
@@ -436,6 +441,9 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			result.Format(_T("圆的面积为%f%s"), cir1.area(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
+		else
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+
 	}
 	else if (n1 == 3)
 	{
@@ -447,7 +455,7 @@ void CcalgraphyDlg::OnBnClickedButton1()
 		{
 			MessageBox(_T("请完整输入该输入的内容"), MB_OK);
 		}
-		else
+		else if(judgenum(X1)&&judgenum(X2)&&judgenum(X3)&&judgenum(Y1))
 		{
 			x11 = _ttof(X1);
 			y11 = _ttof(Y1);
@@ -469,6 +477,9 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			result.Format(_T("圆弧面积为%f%s"), A1.area(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
+		else
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+
 	}
 
 	// TODO: 在此添加控件通知处理程序代码
@@ -494,7 +505,7 @@ void CcalgraphyDlg::OnBnClickedButton8()
 		{
 			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
 		}
-		else
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4))
 		{
 			x11 = _ttof(X1);
 			x22 = _ttof(X2);
@@ -527,6 +538,8 @@ void CcalgraphyDlg::OnBnClickedButton8()
 				MessageBox(_T("你输入的坐标构不成平行四边形"), _T("警告"), MB_OK);
 			}
 		}
+		else
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
 	}
 	else if (n1 == 2)
 	{
@@ -537,7 +550,7 @@ void CcalgraphyDlg::OnBnClickedButton8()
 		{
 			MessageBox(_T("请完整输入该输入的内容"), _T("警告"), MB_OK);
 		}
-		else
+		else if(judgenum(X1)&&judgenum(Y1)&&judgenum(X1))
 		{
 			x11 = _ttof(X1);
 			y11 = _ttof(Y1);
@@ -558,6 +571,8 @@ void CcalgraphyDlg::OnBnClickedButton8()
 			result.Format(_T("圆的周长为%f%s"), cir1.length(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
+		else
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
 	}
 	else if (n1 == 3)
 	{
@@ -569,7 +584,7 @@ void CcalgraphyDlg::OnBnClickedButton8()
 		{
 			MessageBox(_T("请完整输入该输入的内容"), MB_OK);
 		}
-		else
+		else if(judgenum(X1)&&judgenum(Y1)&&judgenum(X2)&&judgenum(X3))
 		{
 			x11 = _ttof(X1);
 			y11 = _ttof(Y1);
@@ -591,6 +606,8 @@ void CcalgraphyDlg::OnBnClickedButton8()
 			result.Format(_T("圆弧周长为%f%s"), A1.length(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
+		else
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
 	}
 	// TODO: 在此添加控件通知处理程序代码
 }
@@ -643,6 +660,32 @@ void CcalgraphyDlg::ShowHide(int b, int c, int d, int e, int f, int g, int h,int
 	GetDlgItem(IDC_EDIT9)->ShowWindow(g);
 	GetDlgItem(IDC_BUTTON1)->ShowWindow(h);
 	GetDlgItem(IDC_BUTTON8)->ShowWindow(i);
+}
+bool CcalgraphyDlg::judgenum(CString s1)
+{
+	int i;
+	int n = s1.GetLength();
+	if ((s1[0] == '-' || (s1[0] >= '0' && s1[0] <= '9'))&&n>=4)
+	{
+		for (i = 0; i < s1.GetLength(); i++)
+		{
+			if (i == s1.GetLength() - 3)
+				i++;
+			if (s1[i] >= '0' && s1[i] <= '9')
+				continue;
+			else
+			{
+				return false;
+				break;
+			}
+		}
+		if (i == s1.GetLength())
+		{
+			return true;
+		}
+	}
+	else
+		return false;
 }
 
 

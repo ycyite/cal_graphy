@@ -11,6 +11,7 @@ class CcalgraphyDlg : public CDialogEx
 public:
 	CcalgraphyDlg(CWnd* pParent = nullptr);	// 标准构造函数
 	void ShowHide(int , int , int , int , int , int , int ,int );
+	bool judgenum(CString);
 //郭必然提议定义一个函数减少工作量
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
