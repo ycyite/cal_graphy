@@ -3,10 +3,10 @@
 #include<cmath>
 #include"experiment_2.h"
 using namespace std;
-Point::Point()
+Point::Point(double a, double b)
 {
-	x = 0;
-	y = 0;
+	x = a;
+	y = b;
 }
 Point::~Point()
 {
@@ -19,16 +19,14 @@ inline void Point::setY(double b)
 {
 	y = b;
 }
-inline line::line(double a, double b, double c, double d)
+line::line(double q, double w, double e, double r) :Point(q, w)
 {
-	x1 = a;
-	y1 = b;
-	x2 = c;
-	y2 = d;
+	x1 = e;
+	y1 = r;
 }
 double line::length() const
 {
-	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+	return sqrt((x1 - x) * (x1 - x) + (y1 - y) * (y1 - y));
 }
 double line::area() const
 {
@@ -37,20 +35,16 @@ double line::area() const
 line::~line()
 {
 }
-parallelogram::parallelogram(double a1, double b1, double a2, double b2, double a3, double b3, double a4, double b4)
+parallelogram::parallelogram(double a1, double b1, double a2, double b2, double a3, double b3, double a4, double b4) :line(a1, b1, a2, b2)
 {
-	x3 = a1;
-	x4 = a2;
-	x5 = a3;
-	x6 = a4;
-	y3 = b1;
-	y4 = b2;
-	y5 = b3;
-	y6 = b4;
+	x2 = a3;
+	y2 = b3;
+	x3 = a4;
+	y3 = b4;
 }
 bool parallelogram::judge()
 {
-	if ((x3 - x4) == (x6 - x5) && (y3 - y4) == (y6 - y5))
+	if ((x - x1) == (x2 - x3) && (y - y1) == (y2 - y3))
 		return true;
 	else
 		return false;
@@ -58,27 +52,27 @@ bool parallelogram::judge()
 double parallelogram::length()const
 {
 	double a, b;
-	a = sqrt(pow((x3 - x4), 2) + pow((y3 - y4), 2));
-	b = sqrt(pow((x4 - x5), 2) + pow((y4 - y5), 2));
+	a = sqrt(pow((x - x1), 2) + pow((y - y1), 2));
+	b = sqrt(pow((x1 - x3), 2) + pow((y1 - y3), 2));
 	return (a + b) * 2;
 }
 double parallelogram::area()const
 {
 	double p, a, b, c, s;
-	a = sqrt(pow((x3 - x4), 2) + pow((y3 - y4), 2));
-	b = sqrt(pow((x3 - x5), 2) + pow((y3 - y5), 2));
-	c = sqrt(pow((x4 - x5), 2) + pow((y4 - y5), 2));
+	a = sqrt(pow((x - x1), 2) + pow((y - y1), 2));
+	b = sqrt(pow((x - x2), 2) + pow((y - y2), 2));
+	c = sqrt(pow((x1 - x2), 2) + pow((y1 - y2), 2));
 	p = (a + b + c) / 2;
-	s = 2 * sqrt(p*(p - a)*(p - b)*(p - c));
+	s = 2 * sqrt(p * (p - a) * (p - b) * (p - c));
 	return s;
 }
 parallelogram::~parallelogram()
 {
 }
-inline Circle::Circle(double x, double y, double R)
+inline Circle::Circle(double x, double y, double R) :Point(x, y)
 {
-	x7 = x;
-	y7 = y;
+	x4 = x;
+	y4 = y;
 	radius = R;
 }
 inline void Circle::getradius(double R)
@@ -93,18 +87,18 @@ inline double Circle::length() const
 {
 	return 2 * PI * radius;
 }
-Angle::Angle(double a,double b,double c,double an):Circle(a,b,c)
-{	
+Angle::Angle(double a, double b, double c, double an) :Circle(a, b, c)
+{
 	angle = an;
 }
 double Angle::length()const
 {
-	return (2*radius+radius*(angle/180)*PI);
+	return (2 * radius + radius * (angle / 180) * PI);
 }
 double Angle::area()const
 {
 	double area;
-	area = radius * radius * (angle /360)*PI;
+	area = radius * radius * (angle / 360) * PI;
 	return (area);
 }
 Angle::~Angle()//定义析构函数
