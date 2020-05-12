@@ -323,13 +323,13 @@ void CcalgraphyDlg::OnEnChangeEdit9()
 void CcalgraphyDlg::OnBnClickedButton1()
 {
 	CString result = _T("");
-	if (n1 == 0)
+	switch(n1)
 	{
+	case 0:
 		x_1.GetWindowTextW(X1);
 		x_2.GetWindowTextW(X2);
 		y_1.GetWindowTextW(Y1);
 		y_2.GetWindowTextW(Y2);
-
 		if (X1 == _T("") || Y1 == _T("") || X2 == _T("") || Y2 == _T(""))
 		{
 			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
@@ -342,27 +342,26 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			y11 = _ttof(Y1);
 			y22 = _ttof(Y2);
 			line lin1(x11, y11, x22, y22);
-			if (n2 == 0)
+			switch(n2)
 			{
+			case 0:
 				unit1 = "厘米";
-			}
-			else if (n2 == 1)
-			{
+				break;
+			case 1:
 				unit1 = "毫米";
-			}
-			else if (n2 == 2)
-			{
+				break;
+			case 2:
 				unit1 = "米";
+				break;
+
 			}
 			result.Format(_T("线段长度为%f%s"), lin1.length(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 		else
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-
-	}
-	else if (n1 == 1)
-	{
+		break;
+	case 1:
 		x_1.GetWindowTextW(X1);
 		x_2.GetWindowTextW(X2);
 		y_1.GetWindowTextW(Y1);
@@ -388,17 +387,17 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
 			if (pall.judge())
 			{
-				if (n2 == 0)
-				{
+				switch(n2)
+				{ 
+				case 0:
 					unit1 = "平方厘米";
-				}
-				else if (n2 == 1)
-				{
+					break;
+				case 1:
 					unit1 = "平方毫米";
-				}
-				else if (n2 == 2)
-				{
+					break;
+				case 2:
 					unit1 = "平方米";
+					break;
 				}
 				result.Format(_T("平行四边形面积为%f%s"), pall.area(), unit1);
 				SetDlgItemText(IDC_EDIT1, result);
@@ -410,9 +409,8 @@ void CcalgraphyDlg::OnBnClickedButton1()
 		}
 		else
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-	}
-	else if (n1 == 2)
-	{
+		break;
+	case 2:
 		x_1.GetWindowTextW(X1);
 		y_1.GetWindowTextW(Y1);
 		x_2.GetWindowTextW(X2);
@@ -426,27 +424,25 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			y11 = _ttof(Y1);
 			r1 = _ttof(X2);
 			Circle cir1(x11, y11, r1);
-			if (n2 == 0)
+			switch(n2)
 			{
+			case 0:
 				unit1 = "平方厘米";
-			}
-			else if (n2 == 1)
-			{
+				break;
+			case 1:
 				unit1 = "平方毫米";
-			}
-			else if (n2 == 2)
-			{
+				break;
+			case 2:
 				unit1 = "平方米";
+				break;
 			}
 			result.Format(_T("圆的面积为%f%s"), cir1.area(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 		else
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-
-	}
-	else if (n1 == 3)
-	{
+		break;
+	case 3:
 		x_1.GetWindowTextW(X1);
 		y_1.GetWindowTextW(Y1);
 		x_2.GetWindowTextW(X2);
@@ -462,24 +458,24 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			r1 = _ttof(X2);
 			arc = _ttof(X3);
 			Angle A1(x11, y11, r1, arc);
-			if (n2 == 0)
+			switch(n2)
 			{
+			case 0:
 				unit1 = "平方厘米";
-			}
-			else if (n2 == 1)
-			{
+				break;
+			case 1:
 				unit1 = "平方毫米";
-			}
-			else if (n2 == 2)
-			{
+				break;
+			case 2:
 				unit1 = "平方米";
+				break;
 			}
 			result.Format(_T("圆弧面积为%f%s"), A1.area(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 		else
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-
+		break;
 	}
 
 	// TODO: 在此添加控件通知处理程序代码
@@ -491,8 +487,9 @@ void CcalgraphyDlg::OnBnClickedButton1()
 void CcalgraphyDlg::OnBnClickedButton8()
 {
 	CString result = _T("");
-	if (n1 == 1)
+	switch (n1)
 	{
+	case 1:
 		x_1.GetWindowTextW(X1);
 		x_2.GetWindowTextW(X2);
 		y_1.GetWindowTextW(Y1);
@@ -518,17 +515,17 @@ void CcalgraphyDlg::OnBnClickedButton8()
 			parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
 			if (pall.judge())
 			{
-				if (n2 == 0)
+				switch (n2)
 				{
+				case 0:
 					unit1 = "厘米";
-				}
-				else if (n2 == 1)
-				{
+					break;
+				case 1:
 					unit1 = "毫米";
-				}
-				else if (n2 == 2)
-				{
+					break;
+				case 2:
 					unit1 = "米";
+					break;
 				}
 				result.Format(_T("平行四边形周长为%f%s"), pall.length(), unit1);
 				SetDlgItemText(IDC_EDIT1, result);
@@ -540,9 +537,9 @@ void CcalgraphyDlg::OnBnClickedButton8()
 		}
 		else
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-	}
-	else if (n1 == 2)
-	{
+		break;
+
+	case 2:
 		x_1.GetWindowTextW(X1);
 		y_1.GetWindowTextW(Y1);
 		x_2.GetWindowTextW(X2);
@@ -550,32 +547,32 @@ void CcalgraphyDlg::OnBnClickedButton8()
 		{
 			MessageBox(_T("请完整输入该输入的内容"), _T("警告"), MB_OK);
 		}
-		else if(judgenum(X1)&&judgenum(Y1)&&judgenum(X1))
+		else if (judgenum(X1) && judgenum(Y1) && judgenum(X1))
 		{
 			x11 = _ttof(X1);
 			y11 = _ttof(Y1);
 			r1 = _ttof(X2);
 			Circle cir1(x11, y11, r1);
-			if (n2 == 0)
+			switch (n2)
 			{
+			case 0:
 				unit1 = "厘米";
-			}
-			else if (n2 == 1)
-			{
+				break;
+			case 1:
 				unit1 = "毫米";
-			}
-			else if (n2 == 2)
-			{
+				break;
+			case 2:
 				unit1 = "米";
+				break;
 			}
 			result.Format(_T("圆的周长为%f%s"), cir1.length(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 		else
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-	}
-	else if (n1 == 3)
-	{
+		break;
+
+	case 3:
 		x_1.GetWindowTextW(X1);
 		y_1.GetWindowTextW(Y1);
 		x_2.GetWindowTextW(X2);
@@ -584,30 +581,31 @@ void CcalgraphyDlg::OnBnClickedButton8()
 		{
 			MessageBox(_T("请完整输入该输入的内容"), MB_OK);
 		}
-		else if(judgenum(X1)&&judgenum(Y1)&&judgenum(X2)&&judgenum(X3))
+		else if (judgenum(X1) && judgenum(Y1) && judgenum(X2) && judgenum(X3))
 		{
 			x11 = _ttof(X1);
 			y11 = _ttof(Y1);
 			r1 = _ttof(X2);
 			arc = _ttof(X3);
-		  	Angle A1(x11, y11, r1, arc);
-			if (n2 == 0)
+			Angle A1(x11, y11, r1, arc);
+			switch(n2)
 			{
+			case 0:
 				unit1 = "厘米";
-			}
-			else if (n2 == 1)
-			{
+				break;
+			case 1:
 				unit1 = "毫米";
-			}
-			else if (n2 == 2)
-			{
+				break;
+			case 2:
 				unit1 = "米";
+				break;
 			}
 			result.Format(_T("圆弧周长为%f%s"), A1.length(), unit1);
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 		else
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		break;
 	}
 	// TODO: 在此添加控件通知处理程序代码
 }
@@ -669,7 +667,7 @@ bool CcalgraphyDlg::judgenum(CString s1)
 	{
 		for (i = 0; i < s1.GetLength(); i++)
 		{
-			if (i == s1.GetLength() - 3)
+			if (i == s1.GetLength() - 3||s1[i]=='-')
 				i++;
 			if (s1[i] >= '0' && s1[i] <= '9')
 				continue;

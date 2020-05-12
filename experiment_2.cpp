@@ -104,7 +104,7 @@ double Angle::length()const
 double Angle::area()const
 {
 	double area;
-	area = radius * radius * (angle /180)*PI;
+	area = radius * radius * (angle /360)*PI;
 	return (area);
 }
 Angle::~Angle()//定义析构函数
