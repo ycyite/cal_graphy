@@ -61,5 +61,8 @@ public:
 	afx_msg void OnEnChangeEdit1();
 	afx_msg void OnStnClickedP1();
 	afx_msg void OnStnClickedP5();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg LRESULT OnNcHitTest(CPoint point);
+	CBrush m_bkBrush;
 };
 
