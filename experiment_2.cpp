@@ -3,7 +3,7 @@
 #include<cmath>
 #include"experiment_2.h"
 using namespace std;
-Point::Point(double a,double b)
+Point::Point(double a, double b)
 {
 	x = a;
 	y = b;
@@ -19,10 +19,10 @@ inline void Point::setY(double b)
 {
 	y = b;
 }
-inline line::line(double a, double b, double c, double d):Point(a,b)
+line::line(double q, double w, double e, double r) :Point(q, w)
 {
-	c = x1;
-	d = y1;
+	x1 = e;
+	y1 = r;
 }
 double line::length() const
 {
@@ -35,7 +35,7 @@ double line::area() const
 line::~line()
 {
 }
-parallelogram::parallelogram(double a1, double b1, double a2, double b2, double a3, double b3, double a4, double b4):line(a1,b1,a2,b2)
+parallelogram::parallelogram(double a1, double b1, double a2, double b2, double a3, double b3, double a4, double b4) :line(a1, b1, a2, b2)
 {
 	x2 = a3;
 	y2 = b3;
@@ -53,7 +53,7 @@ double parallelogram::length()const
 {
 	double a, b;
 	a = sqrt(pow((x - x1), 2) + pow((y - y1), 2));
-	b = sqrt(pow((x1- x3), 2) + pow((y1 - y3), 2));
+	b = sqrt(pow((x1 - x3), 2) + pow((y1 - y3), 2));
 	return (a + b) * 2;
 }
 double parallelogram::area()const
@@ -63,13 +63,13 @@ double parallelogram::area()const
 	b = sqrt(pow((x - x2), 2) + pow((y - y2), 2));
 	c = sqrt(pow((x1 - x2), 2) + pow((y1 - y2), 2));
 	p = (a + b + c) / 2;
-	s = 2 * sqrt(p*(p - a)*(p - b)*(p - c));
+	s = 2 * sqrt(p * (p - a) * (p - b) * (p - c));
 	return s;
 }
 parallelogram::~parallelogram()
 {
 }
-inline Circle::Circle(double x, double y, double R):Point(x,y)
+inline Circle::Circle(double x, double y, double R) :Point(x, y)
 {
 	x4 = x;
 	y4 = y;
@@ -87,18 +87,18 @@ inline double Circle::length() const
 {
 	return 2 * PI * radius;
 }
-Angle::Angle(double a,double b,double c,double an):Circle(a,b,c)
-{	
+Angle::Angle(double a, double b, double c, double an) :Circle(a, b, c)
+{
 	angle = an;
 }
 double Angle::length()const
 {
-	return (2*radius+radius*(angle/180)*PI);
+	return (2 * radius + radius * (angle / 180) * PI);
 }
 double Angle::area()const
 {
 	double area;
-	area = radius * radius * (angle /180)*PI;
+	area = radius * radius * (angle / 180) * PI;
 	return (area);
 }
 Angle::~Angle()//定义析构函数
