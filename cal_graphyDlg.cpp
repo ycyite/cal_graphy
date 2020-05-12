@@ -111,8 +111,6 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_EN_CHANGE(IDC_EDIT1, &CcalgraphyDlg::OnEnChangeEdit1)
 	ON_STN_CLICKED(IDC_P1, &CcalgraphyDlg::OnStnClickedP1)
 	ON_STN_CLICKED(IDC_P5, &CcalgraphyDlg::OnStnClickedP5)
-	ON_WM_CTLCOLOR()
-	ON_WM_NCHITTEST()
 END_MESSAGE_MAP()
 
 
@@ -154,29 +152,6 @@ BOOL CcalgraphyDlg::OnInitDialog()
 	combox3.InsertString(0, _T("厘米"));
 	combox3.InsertString(1, _T("毫米"));
 	combox3.InsertString(2, _T("米"));
-
-	//
-	CString strBmpPath = _T(".\\res\\back.png");
-
-	CImage img;
-
-	img.Load(strBmpPath);
-
-	MoveWindow(0, 0, img.GetWidth(), img.GetHeight());
-
-	CBitmap bmpTmp;
-
-	bmpTmp.Attach(img.Detach());
-
-	m_bkBrush.CreatePatternBrush(&bmpTmp);
-	//
-	CRgn rgnTmp;
-	RECT rc;
-	GetClientRect(&rc);
-	rgnTmp.CreateRoundRectRgn(rc.left + 3, rc.top + 3, rc.right - rc.left - 3, rc.bottom - rc.top - 3, 6, 6);
-	SetWindowRgn(rgnTmp, TRUE);
-
-
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -733,24 +708,4 @@ void CcalgraphyDlg::OnStnClickedP1()
 void CcalgraphyDlg::OnStnClickedP5()
 {
 	// TODO: 在此添加控件通知处理程序代码
-}
-
-
-HBRUSH CcalgraphyDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
-
-	if (pWnd == this)
-	{
-		return m_bkBrush;
-	}
-
-	return hbr;
-}
-
-
-LRESULT CcalgraphyDlg::OnNcHitTest(CPoint point)
-{
-	LRESULT ret = CDialogEx::OnNcHitTest(point);
-	return (ret == HTCLIENT) ? HTCAPTION : ret;
 }
