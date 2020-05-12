@@ -33,7 +33,7 @@ protected:
 	double x1;
 	double x2;
 	double y1;
-	double y2;
+	double y2;//123456
 public:
 	line(double=0,double =0,double=0,double=0);//声明构造函数
 	virtual double length()const;//声明求周长的虚函数
