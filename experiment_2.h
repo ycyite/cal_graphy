@@ -32,8 +32,6 @@ class line :public Point,public Shape//定义Point的派生类line
 protected:
 	double x1;
 	double x2;
-	double y1;
-	double y2;//123456
 public:
 	line(double=0,double =0,double=0,double=0);//声明构造函数
 	virtual double length()const;//声明求周长的虚函数
@@ -47,10 +45,6 @@ protected:
 	double x4;
 	double y3;
 	double y4;
-	double x5;
-	double x6;
-	double y5;
-	double y6;
 public:
 	parallelogram (double = 0, double = 0, double = 0, double = 0, double = 0, double = 0,double=0,double =0) ;//声明构造函数
 	virtual double length()const;//声明求周长的虚函数,返还周长的数值
@@ -61,8 +55,8 @@ public:
 class Circle :public Point,public Shape//定义Point的派生类Circle
 {
 protected:
-	double y7;
-	double x7;
+	double x5;
+	double y5;
 	double radius;
 public:
 	Circle(double=0,double=0,double=0);//声明构造函数
