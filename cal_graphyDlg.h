@@ -64,5 +64,8 @@ public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg LRESULT OnNcHitTest(CPoint point);
 	CBrush m_bkBrush;
+	afx_msg void OnStnClickedP3();
+	afx_msg void OnCbnSelchangeCombo2();
+	CComboBox combox2;
 };
 

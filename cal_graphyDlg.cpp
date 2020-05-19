@@ -33,6 +33,7 @@ CString Y4 = _T("");
 CString unit1=_T("");
 int n1;
 int n2;
+int n3;
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
@@ -91,6 +92,7 @@ void CcalgraphyDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT9, y_4);
 	DDX_Control(pDX, IDC_EDIT1, show_result);
 	DDX_Control(pDX, IDC_COMBO3, combox3);
+	DDX_Control(pDX, IDC_COMBO2, combox2);
 }
 
 BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
@@ -113,6 +115,8 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_STN_CLICKED(IDC_P5, &CcalgraphyDlg::OnStnClickedP5)
 	ON_WM_CTLCOLOR()
 	ON_WM_NCHITTEST()
+	ON_STN_CLICKED(IDC_P3, &CcalgraphyDlg::OnStnClickedP3)
+	ON_CBN_SELCHANGE(IDC_COMBO2, &CcalgraphyDlg::OnCbnSelchangeCombo2)
 END_MESSAGE_MAP()
 
 
@@ -147,13 +151,12 @@ BOOL CcalgraphyDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	// TODO: 在此添加额外的初始化代码
-	combox1.InsertString(0, _T("线段"));
-	combox1.InsertString(1, _T("平行四边形"));
-	combox1.InsertString(2, _T("圆"));
-	combox1.InsertString(3, _T("圆弧"));
+	
 	combox3.InsertString(0, _T("厘米"));
 	combox3.InsertString(1, _T("毫米"));
 	combox3.InsertString(2, _T("米"));
+	combox2.InsertString(0, _T("二维"));
+	combox2.InsertString(1, _T("三维"));
 
 	//
 	CString strBmpPath = _T(".\\res\\back.png");
@@ -234,62 +237,62 @@ HCURSOR CcalgraphyDlg::OnQueryDragIcon()
 void CcalgraphyDlg::OnCbnSelchangeCombo1()
 {
 	n1=combox1.GetCurSel();
-	
-	ShowHide(0, 0, 0, 0, 0, 0, 0, 0);
-	x_1.SetWindowTextW(_T(""));
-	x_2.SetWindowTextW(_T(""));
-	x_3.SetWindowTextW(_T(""));
-	x_4.SetWindowTextW(_T(""));
-	y_1.SetWindowTextW(_T(""));
-	y_2.SetWindowTextW(_T(""));
-	y_3.SetWindowTextW(_T(""));
-	y_4.SetWindowTextW(_T(""));
-	SetDlgItemText(IDC_EDIT1,_T(""));
-	SetDlgItemText(IDC_P5, _T("注意事项：\n要输入两位小数的数字"));
-	if (n1 == 0)
+	n3 = combox2.GetCurSel();
+	if (n3 == 0)
 	{
-		ShowHide(5, 5, 0, 0, 0, 0, 5, 0);
-		SetDlgItemText(IDC_P1, _T("第一个点："));
-		SetDlgItemText(IDC_P2, _T("第二个点："));
-		SetDlgItemText(IDC_BUTTON1, _T("长度"));
-	}
-	else if (n1 == 1)
-	{
-		ShowHide(5, 5, 5, 5, 5, 5, 5, 5);
-		SetDlgItemText(IDC_P1, _T("第一个点："));
-		SetDlgItemText(IDC_P2, _T("第二个点："));
-		SetDlgItemText(IDC_P3, _T("第三个点："));
-		SetDlgItemText(IDC_P4, _T("第四个点："));
-		SetDlgItemText(IDC_BUTTON1, _T("面积"));
-		SetDlgItemText(IDC_BUTTON8, _T("周长"));
-		SetDlgItemText(IDC_P5, _T("注意事项:\n1.请输入两位小数的数字\n2.请按顺时针输入平行四边形坐标"));
-	}
-	else if (n1 == 2)
-	{
-		ShowHide(5, 0, 0, 0, 0, 0, 5, 5);
-		GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
-		GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
-		SetDlgItemText(IDC_P1, _T("第一个点："));
-		SetDlgItemText(IDC_P2, _T("半径："));
-		SetDlgItemText(IDC_BUTTON1, _T("面积"));
-		SetDlgItemText(IDC_BUTTON8, _T("周长"));
-
-	}
-	else if (n1 == 3)
-	{
-		ShowHide(5, 0, 0, 0, 0, 0, 5, 5);
-		GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
-		GetDlgItem(IDC_EDIT4)->ShowWindow(SW_SHOW);
-		GetDlgItem(IDC_P1)->ShowWindow(SW_SHOW);
-		GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
-		GetDlgItem(IDC_P3)->ShowWindow(SW_SHOW);
-		SetDlgItemText(IDC_P1, _T("第一个点："));
-		SetDlgItemText(IDC_P2, _T("半径："));
-		SetDlgItemText(IDC_P3, _T("角度："));
-		SetDlgItemText(IDC_BUTTON1, _T("面积"));
-		SetDlgItemText(IDC_BUTTON8, _T("周长"));
-		SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
-
+		ShowHide(0, 0, 0, 0, 0, 0, 0, 0);
+		x_1.SetWindowTextW(_T(""));
+		x_2.SetWindowTextW(_T(""));
+		x_3.SetWindowTextW(_T(""));
+		x_4.SetWindowTextW(_T(""));
+		y_1.SetWindowTextW(_T(""));
+		y_2.SetWindowTextW(_T(""));
+		y_3.SetWindowTextW(_T(""));
+		y_4.SetWindowTextW(_T(""));
+		SetDlgItemText(IDC_EDIT1, _T(""));
+		SetDlgItemText(IDC_P5, _T("注意事项：\n要输入两位小数的数字"));
+		switch (n1)
+		{
+		case 0:
+			ShowHide(5, 5, 0, 0, 0, 0, 5, 0);
+			SetDlgItemText(IDC_P1, _T("第一个点："));
+			SetDlgItemText(IDC_P2, _T("第二个点："));
+			SetDlgItemText(IDC_BUTTON1, _T("长度"));
+			break;
+		case 1:
+			ShowHide(5, 5, 5, 5, 5, 5, 5, 5);
+			SetDlgItemText(IDC_P1, _T("第一个点："));
+			SetDlgItemText(IDC_P2, _T("第二个点："));
+			SetDlgItemText(IDC_P3, _T("第三个点："));
+			SetDlgItemText(IDC_P4, _T("第四个点："));
+			SetDlgItemText(IDC_BUTTON1, _T("面积"));
+			SetDlgItemText(IDC_BUTTON8, _T("周长"));
+			SetDlgItemText(IDC_P5, _T("注意事项:\n1.请输入两位小数的数字\n2.请按顺时针输入平行四边形坐标"));
+			break;
+		case 2:
+			ShowHide(5, 0, 0, 0, 0, 0, 5, 5);
+			GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
+			SetDlgItemText(IDC_P1, _T("第一个点："));
+			SetDlgItemText(IDC_P2, _T("半径："));
+			SetDlgItemText(IDC_BUTTON1, _T("面积"));
+			SetDlgItemText(IDC_BUTTON8, _T("周长"));
+			break;
+		case 3:
+			ShowHide(5, 0, 0, 0, 0, 0, 5, 5);
+			GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_EDIT4)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P1)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P3)->ShowWindow(SW_SHOW);
+			SetDlgItemText(IDC_P1, _T("第一个点："));
+			SetDlgItemText(IDC_P2, _T("半径："));
+			SetDlgItemText(IDC_P3, _T("角度："));
+			SetDlgItemText(IDC_BUTTON1, _T("面积"));
+			SetDlgItemText(IDC_BUTTON8, _T("周长"));
+			SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
+			break;
+		}
 	}
 	// TODO: 在此添加控件通知处理程序代码
 }
@@ -753,4 +756,39 @@ LRESULT CcalgraphyDlg::OnNcHitTest(CPoint point)
 {
 	LRESULT ret = CDialogEx::OnNcHitTest(point);
 	return (ret == HTCLIENT) ? HTCAPTION : ret;
+}
+
+
+void CcalgraphyDlg::OnStnClickedP3()
+{
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CcalgraphyDlg::OnCbnSelchangeCombo2()
+{
+	n3 = combox2.GetCurSel();
+	combox1.ResetContent();
+	if (n3 == 0)
+	{
+		combox1.InsertString(0, _T("线段"));
+		combox1.InsertString(1, _T("平行四边形"));
+		combox1.InsertString(2, _T("圆"));
+		combox1.InsertString(3, _T("圆弧"));
+	}
+	else if (n3 == 1)
+	{
+		combox1.InsertString(0, _T("三棱柱"));
+		combox1.InsertString(1, _T("三棱锥"));
+		combox1.InsertString(2, _T("四棱柱"));
+		combox1.InsertString(3, _T("四棱锥"));
+		combox1.InsertString(4, _T("三棱台"));
+		combox1.InsertString(5, _T("四棱台"));
+		combox1.InsertString(6, _T("球体"));
+		combox1.InsertString(7, _T("圆柱"));
+		combox1.InsertString(8, _T("圆锥"));
+		combox1.InsertString(9, _T("半球"));
+	}
+	GetDlgItem(IDC_COMBO3)->ShowWindow(SW_SHOW);
+	// TODO: 在此添加控件通知处理程序代码
 }
