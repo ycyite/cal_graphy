@@ -93,6 +93,15 @@ void CcalgraphyDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT1, show_result);
 	DDX_Control(pDX, IDC_COMBO3, combox3);
 	DDX_Control(pDX, IDC_COMBO2, combox2);
+	DDX_Control(pDX, IDC_EDIT10, x_5);
+	DDX_Control(pDX, IDC_EDIT11, y_5);
+	DDX_Control(pDX, IDC_EDIT12, x_6);
+	DDX_Control(pDX, IDC_EDIT13, y_6);
+	DDX_Control(pDX, IDC_EDIT14, x_7);
+	DDX_Control(pDX, IDC_EDIT15, y_7);
+	DDX_Control(pDX, IDC_EDIT16, x_8);
+	DDX_Control(pDX, IDC_EDIT17, y_8);
+	DDX_Control(pDX, IDC_EDIT18, x_9);
 }
 
 BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
@@ -117,6 +126,9 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_WM_NCHITTEST()
 	ON_STN_CLICKED(IDC_P3, &CcalgraphyDlg::OnStnClickedP3)
 	ON_CBN_SELCHANGE(IDC_COMBO2, &CcalgraphyDlg::OnCbnSelchangeCombo2)
+	ON_EN_CHANGE(IDC_EDIT14, &CcalgraphyDlg::OnEnChangeEdit14)
+	ON_EN_CHANGE(IDC_EDIT16, &CcalgraphyDlg::OnEnChangeEdit16)
+	ON_EN_CHANGE(IDC_EDIT7, &CcalgraphyDlg::OnEnChangeEdit7)
 END_MESSAGE_MAP()
 
 
@@ -241,6 +253,7 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 	if (n3 == 0)
 	{
 		ShowHide(0, 0, 0, 0, 0, 0, 0, 0);
+		ShowHide1(0, 0, 0, 0, 0);
 		x_1.SetWindowTextW(_T(""));
 		x_2.SetWindowTextW(_T(""));
 		x_3.SetWindowTextW(_T(""));
@@ -273,7 +286,7 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 			ShowHide(5, 0, 0, 0, 0, 0, 5, 5);
 			GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
 			GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
-			SetDlgItemText(IDC_P1, _T("第一个点："));
+			SetDlgItemText(IDC_P1, _T("圆心："));
 			SetDlgItemText(IDC_P2, _T("半径："));
 			SetDlgItemText(IDC_BUTTON1, _T("面积"));
 			SetDlgItemText(IDC_BUTTON8, _T("周长"));
@@ -285,7 +298,7 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 			GetDlgItem(IDC_P1)->ShowWindow(SW_SHOW);
 			GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
 			GetDlgItem(IDC_P3)->ShowWindow(SW_SHOW);
-			SetDlgItemText(IDC_P1, _T("第一个点："));
+			SetDlgItemText(IDC_P1, _T("圆心："));
 			SetDlgItemText(IDC_P2, _T("半径："));
 			SetDlgItemText(IDC_P3, _T("角度："));
 			SetDlgItemText(IDC_BUTTON1, _T("面积"));
@@ -293,6 +306,173 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 			SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
 			break;
 		}
+	}
+	else if (n3 == 1)
+	{
+		ShowHide(0, 0, 0, 0, 0, 0, 0, 0);
+		ShowHide1(0, 0, 0, 0, 0);
+		x_1.SetWindowTextW(_T(""));
+		x_2.SetWindowTextW(_T(""));
+		x_3.SetWindowTextW(_T(""));
+		x_4.SetWindowTextW(_T(""));
+		y_1.SetWindowTextW(_T(""));
+		y_2.SetWindowTextW(_T(""));
+		y_3.SetWindowTextW(_T(""));
+		y_4.SetWindowTextW(_T(""));
+		x_5.SetWindowTextW(_T(""));
+		x_6.SetWindowTextW(_T(""));
+		x_7.SetWindowTextW(_T(""));
+		x_8.SetWindowTextW(_T(""));
+		x_9.SetWindowTextW(_T(""));
+		y_5.SetWindowTextW(_T(""));
+		y_6.SetWindowTextW(_T(""));
+		y_7.SetWindowTextW(_T(""));
+		y_8.SetWindowTextW(_T(""));
+		SetDlgItemText(IDC_EDIT1, _T(""));
+		SetDlgItemText(IDC_P5, _T("注意事项：\n要输入两位小数的数字"));
+		switch (n1)
+		{
+		case 0:
+			ShowHide(5, 5, 5, 5, 5, 5, 5, 5);
+			ShowHide1(0, 0, 0, 0, 0);
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_P1, _T("第一个点"));
+			SetDlgItemText(IDC_P2, _T("第二个点"));
+			SetDlgItemText(IDC_P3, _T("第三个点"));
+			SetDlgItemText(IDC_P4, _T("高"));
+			GetDlgItem(IDC_EDIT9)->ShowWindow(SW_HIDE);
+			break;
+		case 1:
+			ShowHide(5, 5, 5, 5, 5, 5, 5, 5);
+			ShowHide1(5, 0, 0, 0, 0);
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_P1, _T("第一个点"));
+			SetDlgItemText(IDC_P2, _T("第二个点"));
+			SetDlgItemText(IDC_P3, _T("第三个点"));
+			SetDlgItemText(IDC_P4, _T("顶点"));
+			SetDlgItemText(IDC_P6, _T("高"));
+			GetDlgItem(IDC_EDIT11)->ShowWindow(SW_HIDE);
+			break;
+		case 2:
+			ShowHide(5, 5, 5, 5, 5, 5, 5, 5);
+			ShowHide1(5, 0, 0, 0, 0);
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_P1, _T("第一个点"));
+			SetDlgItemText(IDC_P2, _T("第二个点"));
+			SetDlgItemText(IDC_P3, _T("第三个点"));
+			SetDlgItemText(IDC_P4, _T("第四个点"));
+			SetDlgItemText(IDC_P6, _T("高"));
+			GetDlgItem(IDC_EDIT11)->ShowWindow(SW_HIDE);
+			SetDlgItemText(IDC_P5, _T("注意事项:\n1.请输入两位小数的数字\n2.请按顺时针输入四边形坐标"));
+			break;
+		case 3:
+			ShowHide(5, 5, 5, 5, 5, 5, 5, 5);
+			ShowHide1(5, 5, 0, 0, 0);
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_P1, _T("第一个点"));
+			SetDlgItemText(IDC_P2, _T("第二个点"));
+			SetDlgItemText(IDC_P3, _T("第三个点"));
+			SetDlgItemText(IDC_P4, _T("第四个点"));
+			SetDlgItemText(IDC_P6, _T("顶点"));
+			SetDlgItemText(IDC_P7, _T("高"));
+			GetDlgItem(IDC_EDIT13)->ShowWindow(SW_HIDE);
+			SetDlgItemText(IDC_P5, _T("注意事项:\n1.请输入两位小数的数字\n2.请按顺时针输入四边形坐标"));
+			break;
+		case 4:
+			ShowHide(5, 5, 5, 5, 5, 5, 5, 5);
+			ShowHide1(5, 5, 5, 0, 0);
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_P1, _T("底面第一个点"));
+			SetDlgItemText(IDC_P2, _T("底面第二个点"));
+			SetDlgItemText(IDC_P3, _T("底面第三个点"));
+			SetDlgItemText(IDC_P4, _T("顶面第一个点"));
+			SetDlgItemText(IDC_P6, _T("顶面第二个点"));
+			SetDlgItemText(IDC_P7, _T("顶面第三个点"));
+			SetDlgItemText(IDC_P8, _T("高"));
+			GetDlgItem(IDC_EDIT15)->ShowWindow(SW_HIDE);
+			break;
+		case 5:
+			ShowHide(5, 5, 5, 5, 5, 5, 5, 5);
+			ShowHide1(5, 5, 5, 5, 5);
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_P1, _T("底面第一个点"));
+			SetDlgItemText(IDC_P2, _T("底面第二个点"));
+			SetDlgItemText(IDC_P3, _T("底面第三个点"));
+			SetDlgItemText(IDC_P4, _T("底面第四个点"));
+			SetDlgItemText(IDC_P6, _T("顶面第一个点"));
+			SetDlgItemText(IDC_P7, _T("顶面第二个点"));
+			SetDlgItemText(IDC_P8, _T("顶面第三个点"));
+			SetDlgItemText(IDC_P9, _T("顶面第四个点"));
+			SetDlgItemText(IDC_P10, _T("高"));
+			SetDlgItemText(IDC_P5, _T("注意事项:\n1.请输入两位小数的数字\n2.请按顺时针输入四边形坐标"));
+			break;
+		case 6:
+			ShowHide(5, 0, 0, 0, 0, 0, 5, 5);
+			ShowHide1(0, 0, 0, 0, 0);
+			GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
+			SetDlgItemText(IDC_P1, _T("圆心"));
+			SetDlgItemText(IDC_P2, _T("半径"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
+			break;
+		case 7:
+			ShowHide(5, 0, 0, 0, 0, 0, 5, 5);
+			ShowHide1(0, 0, 0, 0, 0);
+			GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P3)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_EDIT4)->ShowWindow(SW_SHOW);
+			SetDlgItemText(IDC_P3, _T("高"));
+			SetDlgItemText(IDC_P1, _T("圆心"));
+			SetDlgItemText(IDC_P2, _T("半径"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
+			break;
+		case 8:
+			ShowHide(5, 5, 0, 0, 0, 0, 5, 5);
+			ShowHide1(0, 0, 0, 0, 0);
+			GetDlgItem(IDC_EDIT5)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P4)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P3)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_EDIT4)->ShowWindow(SW_SHOW);
+			SetDlgItemText(IDC_P3, _T("半径"));
+			SetDlgItemText(IDC_P1, _T("底圆圆心"));
+			SetDlgItemText(IDC_P2, _T("顶点"));
+			SetDlgItemText(IDC_P4, _T("高"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
+			break;
+		case 9:
+			ShowHide(5, 5, 0, 0, 0, 0, 5, 5);
+			ShowHide1(0, 0, 0, 0, 0);
+			GetDlgItem(IDC_EDIT5)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P4)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P3)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_EDIT4)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P6)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_EDIT10)->ShowWindow(SW_SHOW);
+			SetDlgItemText(IDC_P3, _T("底圆半径"));
+			SetDlgItemText(IDC_P1, _T("底圆圆心"));
+			SetDlgItemText(IDC_P2, _T("顶圆圆心"));
+			SetDlgItemText(IDC_P4, _T("顶圆半径"));
+			SetDlgItemText(IDC_P6, _T("高"));
+			SetDlgItemText(IDC_BUTTON1, _T("体积"));
+			SetDlgItemText(IDC_BUTTON8, _T("面积"));
+			SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
+			break;
+
+		}
+
 	}
 	// TODO: 在此添加控件通知处理程序代码
 }
@@ -769,6 +949,8 @@ void CcalgraphyDlg::OnCbnSelchangeCombo2()
 {
 	n3 = combox2.GetCurSel();
 	combox1.ResetContent();
+	ShowHide(0, 0, 0, 0, 0, 0, 0, 0);
+	ShowHide1(0, 0, 0, 0, 0);
 	if (n3 == 0)
 	{
 		combox1.InsertString(0, _T("线段"));
@@ -787,8 +969,62 @@ void CcalgraphyDlg::OnCbnSelchangeCombo2()
 		combox1.InsertString(6, _T("球体"));
 		combox1.InsertString(7, _T("圆柱"));
 		combox1.InsertString(8, _T("圆锥"));
-		combox1.InsertString(9, _T("半球"));
+		combox1.InsertString(9, _T("圆台"));
 	}
 	GetDlgItem(IDC_COMBO3)->ShowWindow(SW_SHOW);
 	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CcalgraphyDlg::OnEnChangeEdit14()
+{
+	// TODO:  如果该控件是 RICHEDIT 控件，它将不
+	// 发送此通知，除非重写 CDialogEx::OnInitDialog()
+	// 函数并调用 CRichEditCtrl().SetEventMask()，
+	// 同时将 ENM_CHANGE 标志“或”运算到掩码中。
+
+	// TODO:  在此添加控件通知处理程序代码
+}
+
+
+void CcalgraphyDlg::OnEnChangeEdit16()
+{
+	// TODO:  如果该控件是 RICHEDIT 控件，它将不
+	// 发送此通知，除非重写 CDialogEx::OnInitDialog()
+	// 函数并调用 CRichEditCtrl().SetEventMask()，
+	// 同时将 ENM_CHANGE 标志“或”运算到掩码中。
+
+	// TODO:  在此添加控件通知处理程序代码
+}
+void CcalgraphyDlg::ShowHide1(int a, int b, int c, int d, int e)
+{
+	GetDlgItem(IDC_P6)->ShowWindow(a);
+	GetDlgItem(IDC_EDIT10)->ShowWindow(a);
+	GetDlgItem(IDC_EDIT11)->ShowWindow(a);
+	//
+	GetDlgItem(IDC_P7)->ShowWindow(b);
+	GetDlgItem(IDC_EDIT12)->ShowWindow(b);
+	GetDlgItem(IDC_EDIT13)->ShowWindow(b);
+	//
+	GetDlgItem(IDC_P8)->ShowWindow(c);
+	GetDlgItem(IDC_EDIT14)->ShowWindow(c);
+	GetDlgItem(IDC_EDIT15)->ShowWindow(c);
+	//
+	GetDlgItem(IDC_P9)->ShowWindow(d);
+	GetDlgItem(IDC_EDIT16)->ShowWindow(d);
+	GetDlgItem(IDC_EDIT17)->ShowWindow(d);
+	//
+	GetDlgItem(IDC_P10)->ShowWindow(e);
+	GetDlgItem(IDC_EDIT18)->ShowWindow(e);
+}
+
+
+void CcalgraphyDlg::OnEnChangeEdit7()
+{
+	// TODO:  如果该控件是 RICHEDIT 控件，它将不
+	// 发送此通知，除非重写 CDialogEx::OnInitDialog()
+	// 函数并调用 CRichEditCtrl().SetEventMask()，
+	// 同时将 ENM_CHANGE 标志“或”运算到掩码中。
+
+	// TODO:  在此添加控件通知处理程序代码
 }

@@ -33,6 +33,20 @@
 #define IDC_COMBO3                      1032
 #define IDC_P5                          1033
 #define IDC_COMBO2                      1034
+#define IDC_EDIT10                      1035
+#define IDC_EDIT11                      1036
+#define IDC_EDIT12                      1037
+#define IDC_EDIT13                      1038
+#define IDC_EDIT14                      1039
+#define IDC_EDIT15                      1040
+#define IDC_EDIT16                      1041
+#define IDC_EDIT17                      1042
+#define IDC_EDIT18                      1043
+#define IDC_P6                          1044
+#define IDC_P7                          1045
+#define IDC_P8                          1046
+#define IDC_P9                          1047
+#define IDC_P10                         1048
 
 // Next default values for new objects
 // 
@@ -40,7 +54,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        132
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1035
+#define _APS_NEXT_CONTROL_VALUE         1049
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

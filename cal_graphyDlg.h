@@ -11,6 +11,7 @@ class CcalgraphyDlg : public CDialogEx
 public:
 	CcalgraphyDlg(CWnd* pParent = nullptr);	// 标准构造函数
 	void ShowHide(int , int , int , int , int , int , int ,int );
+	void ShowHide1(int, int, int, int, int);
 	bool judgenum(CString);
 //郭必然提议定义一个函数减少工作量
 // 对话框数据
@@ -67,5 +68,17 @@ public:
 	afx_msg void OnStnClickedP3();
 	afx_msg void OnCbnSelchangeCombo2();
 	CComboBox combox2;
+	afx_msg void OnEnChangeEdit14();
+	afx_msg void OnEnChangeEdit16();
+	CEdit x_5;
+	CEdit y_5;
+	CEdit x_6;
+	CEdit y_6;
+	CEdit x_7;
+	CEdit y_7;
+	CEdit x_8;
+	CEdit y_8;
+	CEdit x_9;
+	afx_msg void OnEnChangeEdit7();
 };
 
