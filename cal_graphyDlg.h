@@ -12,6 +12,9 @@ public:
 	CcalgraphyDlg(CWnd* pParent = nullptr);	// 标准构造函数
 	void ShowHide(int , int , int , int , int , int , int ,int );
 	void ShowHide1(int, int, int, int, int);
+	CString area_unit(int n);
+	CString volume_unit(int n);
+	CString length_unit(int n);
 	bool judgenum(CString);
 //郭必然提议定义一个函数减少工作量
 // 对话框数据

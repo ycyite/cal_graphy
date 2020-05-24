@@ -20,6 +20,15 @@ double y11=0;
 double y22=0;
 double y33=0;
 double y44=0;
+double height = 0;
+double x55 = 0;
+double y55 = 0;
+double x66 = 0;
+double y66 = 0;
+double x77 = 0;
+double y77 = 0;
+double x88 = 0;
+double y88 = 0;
 double r1 = 0;
 double arc = 0;
 CString X1=_T("");
@@ -30,6 +39,15 @@ CString X3 = _T("");
 CString Y3 = _T("");
 CString X4 = _T("");
 CString Y4 = _T("");
+CString X5 = _T("");
+CString Y5 = _T("");
+CString X6 = _T("");
+CString Y6 = _T("");
+CString X7 = _T("");
+CString Y7 = _T("");
+CString X8 = _T("");
+CString Y8 = _T("");
+CString X9 = _T("");
 CString unit1=_T("");
 int n1;
 int n2;
@@ -395,6 +413,7 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 			SetDlgItemText(IDC_P7, _T("顶面第三个点"));
 			SetDlgItemText(IDC_P8, _T("高"));
 			GetDlgItem(IDC_EDIT15)->ShowWindow(SW_HIDE);
+			SetDlgItemText(IDC_P5, _T("注意事项:\n1.请输入两位小数的数字\n2.请对应输入顶面与地面的坐标"));
 			break;
 		case 5:
 			ShowHide(5, 5, 5, 5, 5, 5, 5, 5);
@@ -410,7 +429,7 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 			SetDlgItemText(IDC_P8, _T("顶面第三个点"));
 			SetDlgItemText(IDC_P9, _T("顶面第四个点"));
 			SetDlgItemText(IDC_P10, _T("高"));
-			SetDlgItemText(IDC_P5, _T("注意事项:\n1.请输入两位小数的数字\n2.请按顺时针输入四边形坐标"));
+			SetDlgItemText(IDC_P5, _T("注意事项:\n1.请输入两位小数的数字\n2.请按顺时针输入四边形坐标\n3.请对应输入顶面与底面坐标"));
 			break;
 		case 6:
 			ShowHide(5, 0, 0, 0, 0, 0, 5, 5);
@@ -438,16 +457,15 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 			SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
 			break;
 		case 8:
-			ShowHide(5, 5, 0, 0, 0, 0, 5, 5);
+			ShowHide(5,0,0,0,0,0,5,5);
 			ShowHide1(0, 0, 0, 0, 0);
-			GetDlgItem(IDC_EDIT5)->ShowWindow(SW_SHOW);
-			GetDlgItem(IDC_P4)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_P2)->ShowWindow(SW_SHOW);
 			GetDlgItem(IDC_P3)->ShowWindow(SW_SHOW);
 			GetDlgItem(IDC_EDIT4)->ShowWindow(SW_SHOW);
-			SetDlgItemText(IDC_P3, _T("半径"));
-			SetDlgItemText(IDC_P1, _T("底圆圆心"));
-			SetDlgItemText(IDC_P2, _T("顶点"));
-			SetDlgItemText(IDC_P4, _T("高"));
+			SetDlgItemText(IDC_P3, _T("高"));
+			SetDlgItemText(IDC_P1, _T("圆心"));
+			SetDlgItemText(IDC_P2, _T("半径"));
 			SetDlgItemText(IDC_BUTTON1, _T("体积"));
 			SetDlgItemText(IDC_BUTTON8, _T("面积"));
 			SetDlgItemText(IDC_P5, _T("注意事项：\n1.要输入两位小数的数字\n2.角度的单位为角度制"));
@@ -531,198 +549,27 @@ void CcalgraphyDlg::OnEnChangeEdit9()
 void CcalgraphyDlg::OnBnClickedButton1()
 {
 	CString result = _T("");
-	switch(n1)
+	if (n3 == 0)
 	{
-	case 0:
-		x_1.GetWindowTextW(X1);
-		x_2.GetWindowTextW(X2);
-		y_1.GetWindowTextW(Y1);
-		y_2.GetWindowTextW(Y2);
-		if (X1 == _T("") || Y1 == _T("") || X2 == _T("") || Y2 == _T(""))
+		switch (n1)
 		{
-			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
-			show_result.SetWindowTextW(_T(""));
-		}
-		else if(judgenum(X1)&&judgenum(X2)&&judgenum(Y1)&&judgenum(Y2))
-		{
-			x11 = _ttof(X1);
-			x22 = _ttof(X2);
-			y11 = _ttof(Y1);
-			y22 = _ttof(Y2);
-			line lin1(x11, y11, x22, y22);
-			switch(n2)
+		case 0:
+			x_1.GetWindowTextW(X1);
+			x_2.GetWindowTextW(X2);
+			y_1.GetWindowTextW(Y1);
+			y_2.GetWindowTextW(Y2);
+			if (X1 == _T("") || Y1 == _T("") || X2 == _T("") || Y2 == _T(""))
 			{
-			case 0:
-				unit1 = "厘米";
-				break;
-			case 1:
-				unit1 = "毫米";
-				break;
-			case 2:
-				unit1 = "米";
-				break;
-
+				MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
+				show_result.SetWindowTextW(_T(""));
 			}
-			result.Format(_T("线段长度为%f%s"), lin1.length(), unit1);
-			SetDlgItemText(IDC_EDIT1, result);
-		}
-		else
-			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-		break;
-	case 1:
-		x_1.GetWindowTextW(X1);
-		x_2.GetWindowTextW(X2);
-		y_1.GetWindowTextW(Y1);
-		y_2.GetWindowTextW(Y2);
-		x_3.GetWindowTextW(X3);
-		y_3.GetWindowTextW(Y3);
-		x_4.GetWindowTextW(X4);
-		y_4.GetWindowTextW(Y4);
-		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
-		{
-			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
-		}
-		else if(judgenum(X1)&&judgenum(X2)&&judgenum(X3)&&judgenum(X4)&&judgenum(Y1)&&judgenum(Y2)&&judgenum(Y3)&&judgenum(Y4))
-		{
-			x11 = _ttof(X1);
-			x22 = _ttof(X2);
-			y11 = _ttof(Y1);
-			y22 = _ttof(Y2);
-			x33 = _ttof(X3);
-			y33 = _ttof(Y3);
-			x44 = _ttof(X4);
-			y44 = _ttof(Y4);
-			parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
-			if (pall.judge())
+			else if (judgenum(X1) && judgenum(X2) && judgenum(Y1) && judgenum(Y2))
 			{
-				switch(n2)
-				{ 
-				case 0:
-					unit1 = "平方厘米";
-					break;
-				case 1:
-					unit1 = "平方毫米";
-					break;
-				case 2:
-					unit1 = "平方米";
-					break;
-				}
-				result.Format(_T("平行四边形面积为%f%s"), pall.area(), unit1);
-				SetDlgItemText(IDC_EDIT1, result);
-			}
-			else
-			{
-				MessageBox(_T("你输入的坐标构不成平行四边形"), _T("警告"), MB_OK);
-			}
-		}
-		else
-			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-		break;
-	case 2:
-		x_1.GetWindowTextW(X1);
-		y_1.GetWindowTextW(Y1);
-		x_2.GetWindowTextW(X2);
-		if (X1 == _T("") || X2 == _T("") || Y1 == _T(""))
-		{
-			MessageBox(_T("请完整输入该输入的内容"), _T("警告"), MB_OK);
-		}
-		else if(judgenum(X1)&&judgenum(Y1)&&judgenum(X2))
-		{
-			x11 = _ttof(X1);
-			y11 = _ttof(Y1);
-			r1 = _ttof(X2);
-			Circle cir1(x11, y11, r1);
-			switch(n2)
-			{
-			case 0:
-				unit1 = "平方厘米";
-				break;
-			case 1:
-				unit1 = "平方毫米";
-				break;
-			case 2:
-				unit1 = "平方米";
-				break;
-			}
-			result.Format(_T("圆的面积为%f%s"), cir1.area(), unit1);
-			SetDlgItemText(IDC_EDIT1, result);
-		}
-		else
-			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-		break;
-	case 3:
-		x_1.GetWindowTextW(X1);
-		y_1.GetWindowTextW(Y1);
-		x_2.GetWindowTextW(X2);
-		x_3.GetWindowTextW(X3);
-		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || Y1 == _T(""))
-		{
-			MessageBox(_T("请完整输入该输入的内容"), MB_OK);
-		}
-		else if(judgenum(X1)&&judgenum(X2)&&judgenum(X3)&&judgenum(Y1))
-		{
-			x11 = _ttof(X1);
-			y11 = _ttof(Y1);
-			r1 = _ttof(X2);
-			arc = _ttof(X3);
-			Angle A1(x11, y11, r1, arc);
-			switch(n2)
-			{
-			case 0:
-				unit1 = "平方厘米";
-				break;
-			case 1:
-				unit1 = "平方毫米";
-				break;
-			case 2:
-				unit1 = "平方米";
-				break;
-			}
-			result.Format(_T("圆弧面积为%f%s"), A1.area(), unit1);
-			SetDlgItemText(IDC_EDIT1, result);
-		}
-		else
-			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
-		break;
-	}
-
-	// TODO: 在此添加控件通知处理程序代码
-}
-
-
-
-
-void CcalgraphyDlg::OnBnClickedButton8()
-{
-	CString result = _T("");
-	switch (n1)
-	{
-	case 1:
-		x_1.GetWindowTextW(X1);
-		x_2.GetWindowTextW(X2);
-		y_1.GetWindowTextW(Y1);
-		y_2.GetWindowTextW(Y2);
-		x_3.GetWindowTextW(X3);
-		y_3.GetWindowTextW(Y3);
-		x_4.GetWindowTextW(X4);
-		y_4.GetWindowTextW(Y4);
-		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
-		{
-			MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
-		}
-		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4))
-		{
-			x11 = _ttof(X1);
-			x22 = _ttof(X2);
-			y11 = _ttof(Y1);
-			y22 = _ttof(Y2);
-			x33 = _ttof(X3);
-			y33 = _ttof(Y3);
-			x44 = _ttof(X4);
-			y44 = _ttof(Y4);
-			parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
-			if (pall.judge())
-			{
+				x11 = _ttof(X1);
+				x22 = _ttof(X2);
+				y11 = _ttof(Y1);
+				y22 = _ttof(Y2);
+				line lin1(x11, y11, x22, y22);
 				switch (n2)
 				{
 				case 0:
@@ -734,86 +581,956 @@ void CcalgraphyDlg::OnBnClickedButton8()
 				case 2:
 					unit1 = "米";
 					break;
+
 				}
-				result.Format(_T("平行四边形周长为%f%s"), pall.length(), unit1);
+				result.Format(_T("线段长度为%f%s"), lin1.length(), unit1);
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+				MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+			break;
+		case 1:
+			x_1.GetWindowTextW(X1);
+			x_2.GetWindowTextW(X2);
+			y_1.GetWindowTextW(Y1);
+			y_2.GetWindowTextW(Y2);
+			x_3.GetWindowTextW(X3);
+			y_3.GetWindowTextW(Y3);
+			x_4.GetWindowTextW(X4);
+			y_4.GetWindowTextW(Y4);
+			if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
+			{
+				MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
+			}
+			else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4))
+			{
+				x11 = _ttof(X1);
+				x22 = _ttof(X2);
+				y11 = _ttof(Y1);
+				y22 = _ttof(Y2);
+				x33 = _ttof(X3);
+				y33 = _ttof(Y3);
+				x44 = _ttof(X4);
+				y44 = _ttof(Y4);
+				parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
+				if (pall.judge())
+				{
+					switch (n2)
+					{
+					case 0:
+						unit1 = "平方厘米";
+						break;
+					case 1:
+						unit1 = "平方毫米";
+						break;
+					case 2:
+						unit1 = "平方米";
+						break;
+					}
+					result.Format(_T("平行四边形面积为%f%s"), pall.area(), unit1);
+					SetDlgItemText(IDC_EDIT1, result);
+				}
+				else
+				{
+					MessageBox(_T("你输入的坐标构不成平行四边形"), _T("警告"), MB_OK);
+				}
+			}
+			else
+				MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+			break;
+		case 2:
+			x_1.GetWindowTextW(X1);
+			y_1.GetWindowTextW(Y1);
+			x_2.GetWindowTextW(X2);
+			if (X1 == _T("") || X2 == _T("") || Y1 == _T(""))
+			{
+				MessageBox(_T("请完整输入该输入的内容"), _T("警告"), MB_OK);
+			}
+			else if (judgenum(X1) && judgenum(Y1) && judgenum(X2))
+			{
+				x11 = _ttof(X1);
+				y11 = _ttof(Y1);
+				r1 = _ttof(X2);
+				Circle cir1(x11, y11, r1);
+				switch (n2)
+				{
+				case 0:
+					unit1 = "平方厘米";
+					break;
+				case 1:
+					unit1 = "平方毫米";
+					break;
+				case 2:
+					unit1 = "平方米";
+					break;
+				}
+				result.Format(_T("圆的面积为%f%s"), cir1.area(), unit1);
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+				MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+			break;
+		case 3:
+			x_1.GetWindowTextW(X1);
+			y_1.GetWindowTextW(Y1);
+			x_2.GetWindowTextW(X2);
+			x_3.GetWindowTextW(X3);
+			if (X1 == _T("") || X2 == _T("") || X3 == _T("") || Y1 == _T(""))
+			{
+				MessageBox(_T("请完整输入该输入的内容"), MB_OK);
+			}
+			else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(Y1))
+			{
+				x11 = _ttof(X1);
+				y11 = _ttof(Y1);
+				r1 = _ttof(X2);
+				arc = _ttof(X3);
+				Angle A1(x11, y11, r1, arc);
+				switch (n2)
+				{
+				case 0:
+					unit1 = "平方厘米";
+					break;
+				case 1:
+					unit1 = "平方毫米";
+					break;
+				case 2:
+					unit1 = "平方米";
+					break;
+				}
+				result.Format(_T("圆弧面积为%f%s"), A1.area(), unit1);
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+				MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+			break;
+		}
+	}
+	else if (n3 == 1)
+
+	{
+	switch (n1)
+	{
+	case 0:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3))
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			x33 = _ttof(X3);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			y33 = _ttof(Y3);
+			height = _ttof(X4);
+			triangular_prism tri_prism(x11, y11, x22, y22, x33, y33, height);
+			if (tri_prism.judge1())
+			{
+				result.Format(_T("三棱柱的体积为%f%s"), tri_prism.volume(),volume_unit(n2));
 				SetDlgItemText(IDC_EDIT1, result);
 			}
 			else
 			{
-				MessageBox(_T("你输入的坐标构不成平行四边形"), _T("警告"), MB_OK);
+				MessageBox(_T("你输入的坐标构不成三角形"), _T("警告"), MB_OK);
 			}
 		}
 		else
+		{
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
 		break;
-
+	case 1:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4))
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			x33 = _ttof(X3);
+			x44 = _ttof(X4);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			y33 = _ttof(Y3);
+			y44 = _ttof(Y4);
+			height = _ttof(X5);
+			triangular_pyramid tri_pyramid(x11, y11, x22, y22, x33, y33, height, x44, y44);
+			if (tri_pyramid.judge1())
+			{
+				result.Format(_T("三棱锥的体积为%f%s"), tri_pyramid.volume(),volume_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+			{
+				MessageBox(_T("你输入的坐标构不成三角形"), _T("警告"), MB_OK);
+			}
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
 	case 2:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4))
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			x33 = _ttof(X3);
+			x44 = _ttof(X4);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			y33 = _ttof(Y3);
+			y44 = _ttof(Y4);
+			height = _ttof(X5);
+			quadrangular quad(x11, y11, x22, y22, x33, y33, x44, y44, height);
+			result.Format(_T("四棱柱的体积为%f%s"), quad.volume(),volume_unit(n2));
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+		else
+		{
+			MessageBox(_T("请入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 3:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		y_5.GetWindowTextW(Y5);
+		x_6.GetWindowTextW(X6);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T("") || Y5 == _T("") || X6 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4) && judgenum(Y5) && judgenum(X6))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			x22 = _ttof(X2);
+			y22 = _ttof(Y2);
+			x33 = _ttof(X3);
+			y33 = _ttof(Y3);
+			x44 = _ttof(X4);
+			y44 = _ttof(Y4);
+			x55 = _ttof(X5);
+			y55 = _ttof(Y5);
+			height = _ttof(X6);
+			rectangular_pyramid rec_pyramid(x11, y11, x22, y22, x33, y33, x44, y44, height, x55, y55);
+			result.Format(_T("四棱锥的体积为%f%s"), rec_pyramid.volume(), volume_unit(n2));
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 4:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		y_5.GetWindowTextW(Y5);
+		x_6.GetWindowTextW(X6);
+		y_6.GetWindowTextW(Y6);
+		x_7.GetWindowTextW(X7);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T("") || X6 == _T("") || Y6 == _T("") || X7 == _T("") || Y5 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4) && judgenum(Y5) && judgenum(X6) && judgenum(Y6) && judgenum(X7))
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			x33 = _ttof(X3);
+			x44 = _ttof(X4);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			y33 = _ttof(Y3);
+			y44 = _ttof(Y4);
+			x55 = _ttof(X5);
+			y55 = _ttof(Y5);
+			x66 = _ttof(X6);
+			y66 = _ttof(Y6);
+			height = _ttof(X7);
+			Three_prism thr_prism(x11, y11, x22, y22, x33, y33, height, x44, y44, x55, y55, x66, y66);
+			if (thr_prism.judge2())
+			{
+				result.Format(_T("三棱台的体积为%f%s"), thr_prism.volume(),volume_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+			{
+				MessageBox(_T("你输入的信息构不成三棱台"), _T("警告"), MB_OK);
+			}
+		}
+		break;
+	case 5:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		y_5.GetWindowTextW(Y5);
+		x_6.GetWindowTextW(X6);
+		y_6.GetWindowTextW(Y6);
+		x_7.GetWindowTextW(X7);
+		y_7.GetWindowTextW(Y7);
+		x_8.GetWindowTextW(X8);
+		y_8.GetWindowTextW(Y8);
+		x_9.GetWindowTextW(X9);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T("") || X6 == _T("") || Y6 == _T("") || X7 == _T("") || Y5 == _T("") || Y8 == _T("") || Y7 == _T("") || X8 == _T("") || X9 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(X6) && judgenum(X7) && judgenum(X8) && judgenum(X9) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4) && judgenum(Y5) && judgenum(Y6) && judgenum(Y7) && judgenum(Y8))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			x22 = _ttof(X2);
+			y22 = _ttof(Y2);
+			x33 = _ttof(X3);
+			y33 = _ttof(Y3);
+			x44 = _ttof(X4);
+			y44 = _ttof(Y4);
+			x55 = _ttof(X5);
+			y55 = _ttof(Y5);
+			x66 = _ttof(X6);
+			y66 = _ttof(Y6);
+			x77 = _ttof(X7);
+			y77 = _ttof(Y7);
+			x88 = _ttof(X8);
+			y88 = _ttof(Y8);
+			height = _ttof(X9);
+			quadrangular_frustum_pyramid quad_frust_pyramid(x11, y11, x22, y22, x33, y33, x44, y44, x55, y55, x66, y66, x77, y77, x88, y88, height);
+			if (quad_frust_pyramid.judge3())
+			{
+				result.Format(_T("四棱台体积为%f%s"), quad_frust_pyramid.volume(), volume_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+			{
+				MessageBox(_T("你所输入的数据构不成四棱台"), _T("警告"), MB_OK);
+			}
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 6:
 		x_1.GetWindowTextW(X1);
 		y_1.GetWindowTextW(Y1);
 		x_2.GetWindowTextW(X2);
-		if (X1 == _T("") || X2 == _T("") || Y1 == _T(""))
+		if (X1 == _T("") || Y1 == _T("") || X2 == _T(""))
 		{
-			MessageBox(_T("请完整输入该输入的内容"), _T("警告"), MB_OK);
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
 		}
-		else if (judgenum(X1) && judgenum(Y1) && judgenum(X1))
+		else if (judgenum(X1) && judgenum(X2) && judgenum(Y1))
 		{
 			x11 = _ttof(X1);
 			y11 = _ttof(Y1);
 			r1 = _ttof(X2);
-			Circle cir1(x11, y11, r1);
-			switch (n2)
-			{
-			case 0:
-				unit1 = "厘米";
-				break;
-			case 1:
-				unit1 = "毫米";
-				break;
-			case 2:
-				unit1 = "米";
-				break;
-			}
-			result.Format(_T("圆的周长为%f%s"), cir1.length(), unit1);
+			ball Ball1(x11, y11, r1);
+			result.Format(_T("球的体积为%f%s"), Ball1.volume(), volume_unit(n2));
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 		else
+		{
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
 		break;
-
-	case 3:
+	case 7:
 		x_1.GetWindowTextW(X1);
 		y_1.GetWindowTextW(Y1);
 		x_2.GetWindowTextW(X2);
 		x_3.GetWindowTextW(X3);
 		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || Y1 == _T(""))
 		{
-			MessageBox(_T("请完整输入该输入的内容"), MB_OK);
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
 		}
-		else if (judgenum(X1) && judgenum(Y1) && judgenum(X2) && judgenum(X3))
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(Y1))
 		{
 			x11 = _ttof(X1);
 			y11 = _ttof(Y1);
 			r1 = _ttof(X2);
-			arc = _ttof(X3);
-			Angle A1(x11, y11, r1, arc);
-			switch(n2)
-			{
-			case 0:
-				unit1 = "厘米";
-				break;
-			case 1:
-				unit1 = "毫米";
-				break;
-			case 2:
-				unit1 = "米";
-				break;
-			}
-			result.Format(_T("圆弧周长为%f%s"), A1.length(), unit1);
+			height = _ttof(X3);
+			cylinder cylin1(x11, y11, r1, height);
+			result.Format(_T("圆柱的体积为%f%s"), cylin1.volume(), volume_unit(n2));
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 		else
+		{
 			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
 		break;
+	case 8:
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		x_3.GetWindowTextW(X3);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || Y1 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(Y1))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			r1 = _ttof(X2);
+			height = _ttof(X3);
+			cone con1(x11, y11, r1, height);
+			result.Format(_T("圆柱的面积为%f%s"), con1.volume(), volume_unit(n2));
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 9:
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		x_4.GetWindowTextW(X4);
+		x_5.GetWindowTextW(X5);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("") || X5 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(Y1) && judgenum(Y2) && judgenum(X5))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			x22 = _ttof(X2);
+			y22 = _ttof(Y2);
+			r1 = _ttof(X3);
+			x44 = _ttof(X4);
+			height = _ttof(X5);
+			circular_truncated_cone cir_trun_con1(x11, y11, r1, height, x22, y22, x44);
+			if (cir_trun_con1.judge4())
+			{
+				result.Format(_T("圆台的体积为%f%s"), cir_trun_con1.volume(), volume_unit(n2));
+			}
+			else
+			{
+				MessageBox(_T("所输入的信息构不成圆台"), _T("警告"), MB_OK);
+			}
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	}
+	}
+
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+
+
+void CcalgraphyDlg::OnBnClickedButton8()
+{
+	CString result = _T("");
+	if (n3 == 0)
+	{
+		switch (n1)
+		{
+		case 1:
+			x_1.GetWindowTextW(X1);
+			x_2.GetWindowTextW(X2);
+			y_1.GetWindowTextW(Y1);
+			y_2.GetWindowTextW(Y2);
+			x_3.GetWindowTextW(X3);
+			y_3.GetWindowTextW(Y3);
+			x_4.GetWindowTextW(X4);
+			y_4.GetWindowTextW(Y4);
+			if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
+			{
+				MessageBox(_T("请完整输入坐标内容"), _T("警告"), MB_OK);
+			}
+			else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4))
+			{
+				x11 = _ttof(X1);
+				x22 = _ttof(X2);
+				y11 = _ttof(Y1);
+				y22 = _ttof(Y2);
+				x33 = _ttof(X3);
+				y33 = _ttof(Y3);
+				x44 = _ttof(X4);
+				y44 = _ttof(Y4);
+				parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
+				if (pall.judge())
+				{
+					result.Format(_T("平行四边形周长为%f%s"), pall.length(), length_unit(n2));
+					SetDlgItemText(IDC_EDIT1, result);
+				}
+				else
+				{
+					MessageBox(_T("你输入的坐标构不成平行四边形"), _T("警告"), MB_OK);
+				}
+			}
+			else
+				MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+			break;
+
+		case 2:
+			x_1.GetWindowTextW(X1);
+			y_1.GetWindowTextW(Y1);
+			x_2.GetWindowTextW(X2);
+			if (X1 == _T("") || X2 == _T("") || Y1 == _T(""))
+			{
+				MessageBox(_T("请完整输入该输入的内容"), _T("警告"), MB_OK);
+			}
+			else if (judgenum(X1) && judgenum(Y1) && judgenum(X1))
+			{
+				x11 = _ttof(X1);
+				y11 = _ttof(Y1);
+				r1 = _ttof(X2);
+				Circle cir1(x11, y11, r1);
+				result.Format(_T("圆的周长为%f%s"), cir1.length(),length_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+				MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+			break;
+
+		case 3:
+			x_1.GetWindowTextW(X1);
+			y_1.GetWindowTextW(Y1);
+			x_2.GetWindowTextW(X2);
+			x_3.GetWindowTextW(X3);
+			if (X1 == _T("") || X2 == _T("") || X3 == _T("") || Y1 == _T(""))
+			{
+				MessageBox(_T("请完整输入该输入的内容"),_T("警告"), MB_OK);
+			}
+			else if (judgenum(X1) && judgenum(Y1) && judgenum(X2) && judgenum(X3))
+			{
+				x11 = _ttof(X1);
+				y11 = _ttof(Y1);
+				r1 = _ttof(X2);
+				arc = _ttof(X3);
+				Angle A1(x11, y11, r1, arc);
+				result.Format(_T("圆弧周长为%f%s"), A1.length(),length_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+				MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+			break;
+		}
+	}
+	else if (n3 == 1)
+	{
+	switch (n1)
+	{
+	case 0:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3))
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			x33 = _ttof(X3);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			y33 = _ttof(Y3);
+			height = _ttof(X4);
+			triangular_prism tri_prism(x11, y11, x22, y22, x33, y33, height);
+			if (tri_prism.judge1())
+			{
+				result.Format(_T("三棱柱的面积为%f%s"), tri_prism.area(),area_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+			{
+				MessageBox(_T("你输入的坐标构不成三角形"), _T("警告"), MB_OK);
+			}
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 1:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
+		{	
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4))
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			x33 = _ttof(X3);
+			x44 = _ttof(X4);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			y33 = _ttof(Y3);
+			y44 = _ttof(Y4);
+			height = _ttof(X5);
+			triangular_pyramid tri_pyramid(x11, y11, x22, y22, x33, y33, height, x44, y44);
+			if (tri_pyramid.judge1())
+			{
+				result.Format(_T("三棱锥的面积为%f%s"), tri_pyramid.area(), area_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+			{
+				MessageBox(_T("你输入的坐标构不成三角形"), _T("警告"), MB_OK);
+			}
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 2:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4))
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			x33 = _ttof(X3);
+			x44 = _ttof(X4);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			y33 = _ttof(Y3);
+			y44 = _ttof(Y4);
+			height = _ttof(X5);
+			quadrangular quad(x11, y11, x22, y22, x33, y33, x44, y44, height);
+			result.Format(_T("四棱柱的面积为%f%s"),quad.area(), area_unit(n2));
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+		else
+		{
+			MessageBox(_T("请入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 3:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		y_5.GetWindowTextW(Y5);
+		x_6.GetWindowTextW(X6);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T("")||Y5==_T("")||X6==_T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4) && judgenum(Y5) && judgenum(X6))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			x22 = _ttof(X2);
+			y22 = _ttof(Y2);
+			x33 = _ttof(X3);
+			y33 = _ttof(Y3);
+			x44 = _ttof(X4);
+			y44 = _ttof(Y4);
+			x55 = _ttof(X5);
+			y55 = _ttof(Y5);
+			height = _ttof(X6);
+			rectangular_pyramid rec_pyramid(x11, y11, x22, y22, x33, y33, x44, y44, height, x55, y55);
+			result.Format(_T("四棱锥的面积为%f%s"), rec_pyramid.area(), area_unit(n2));
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 4:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		y_5.GetWindowTextW(Y5);
+		x_6.GetWindowTextW(X6);
+		y_6.GetWindowTextW(Y6);
+		x_7.GetWindowTextW(X7);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T("") || X6 == _T("") || Y6 == _T("") || X7 == _T("") || Y5 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4) && judgenum(Y5) && judgenum(X6) && judgenum(Y6) && judgenum(X7))
+		{
+			x11 = _ttof(X1);
+			x22 = _ttof(X2);
+			x33 = _ttof(X3);
+			x44 = _ttof(X4);
+			y11 = _ttof(Y1);
+			y22 = _ttof(Y2);
+			y33 = _ttof(Y3);
+			y44 = _ttof(Y4);
+			x55 = _ttof(X5);
+			y55 = _ttof(Y5);
+			x66 = _ttof(X6);
+			y66 = _ttof(Y6);
+			height= _ttof(X7);
+			Three_prism thr_prism(x11, y11, x22, y22, x33, y33, height, x44, y44, x55, y55, x66, y66);
+			if (thr_prism.judge2())
+			{
+				result.Format(_T("三棱台的面积为%f%s"), thr_prism.area(), area_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+			{
+				MessageBox(_T("你输入的信息构不成三棱台"), _T("警告"), MB_OK);
+			}
+		}
+		break;
+	case 5:
+		x_1.GetWindowTextW(X1);
+		x_2.GetWindowTextW(X2);
+		y_1.GetWindowTextW(Y1);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		y_3.GetWindowTextW(Y3);
+		x_4.GetWindowTextW(X4);
+		y_4.GetWindowTextW(Y4);
+		x_5.GetWindowTextW(X5);
+		y_5.GetWindowTextW(Y5);
+		x_6.GetWindowTextW(X6);
+		y_6.GetWindowTextW(Y6);
+		x_7.GetWindowTextW(X7);
+		y_7.GetWindowTextW(Y7);
+		x_8.GetWindowTextW(X8);
+		y_8.GetWindowTextW(Y8);
+		x_9.GetWindowTextW(X9);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || X5 == _T("") || Y1 == _T("") || Y2 == _T("") || Y3 == _T("") || Y4 == _T("") || X6 == _T("") || Y6 == _T("") || X7 == _T("") || Y5 == _T("")||Y8==_T("")||Y7==_T("")||X8==_T("")||X9==_T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(X5) && judgenum(X6) && judgenum(X7) && judgenum(X8) && judgenum(X9) && judgenum(Y1) && judgenum(Y2) && judgenum(Y3) && judgenum(Y4) && judgenum(Y5) && judgenum(Y6) && judgenum(Y7) && judgenum(Y8))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			x22 = _ttof(X2);
+			y22 = _ttof(Y2);
+			x33 = _ttof(X3);
+			y33 = _ttof(Y3);
+			x44 = _ttof(X4);
+			y44 = _ttof(Y4);
+			x55 = _ttof(X5);
+			y55 = _ttof(Y5);
+			x66 = _ttof(X6);
+			y66 = _ttof(Y6);
+			x77 = _ttof(X7);
+			y77 = _ttof(Y7);
+			x88 = _ttof(X8);
+			y88 = _ttof(Y8);
+			height = _ttof(X9);
+			quadrangular_frustum_pyramid quad_frust_pyramid(x11, y11, x22, y22, x33, y33, x44, y44,x55, y55, x66, y66, x77, y77, x88,y88,height);
+			if (quad_frust_pyramid.judge3())
+			{
+				result.Format(_T("四棱台面积为%f%s"), quad_frust_pyramid.area(), area_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
+			}
+			else
+			{
+				MessageBox(_T("你所输入的数据构不成四棱台"), _T("警告"), MB_OK);
+			}	
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 6:
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		if (X1 == _T("") || Y1 == _T("") || X2 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(Y1))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			r1= _ttof(X2);
+			ball Ball1(x11, y11, r1);
+			result.Format(_T("球的面积为%f%s"), Ball1.area(), area_unit(n2));
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 7:
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		x_3.GetWindowTextW(X3);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || Y1 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(Y1))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			r1= _ttof(X2);
+			height = _ttof(X3);
+			cylinder cylin1(x11, y11, r1, height);
+			result.Format(_T("圆柱的面积为%f%s"), cylin1.area(), area_unit(n2));
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 8:
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		x_3.GetWindowTextW(X3);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || Y1 == _T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(Y1))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			r1 = _ttof(X2);
+			height = _ttof(X3);
+			cone con1(x11, y11, r1, height);
+			result.Format(_T("圆柱的面积为%f%s"),con1.area(),area_unit(n2));
+			SetDlgItemText(IDC_EDIT1, result);
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	case 9:
+		x_1.GetWindowTextW(X1);
+		y_1.GetWindowTextW(Y1);
+		x_2.GetWindowTextW(X2);
+		y_2.GetWindowTextW(Y2);
+		x_3.GetWindowTextW(X3);
+		x_4.GetWindowTextW(X4);
+		x_5.GetWindowTextW(X5);
+		if (X1 == _T("") || X2 == _T("") || X3 == _T("") || X4 == _T("") || Y1 == _T("") || Y2 == _T("")||X5==_T(""))
+		{
+			MessageBox(_T("请输入完整内容"), _T("警告"), MB_OK);
+		}
+		else if (judgenum(X1) && judgenum(X2) && judgenum(X3) && judgenum(X4) && judgenum(Y1) && judgenum(Y2) && judgenum(X5))
+		{
+			x11 = _ttof(X1);
+			y11 = _ttof(Y1);
+			x22 = _ttof(X2);
+			y22 = _ttof(Y2);
+			r1 = _ttof(X3);
+			x44 = _ttof(X4);
+			height = _ttof(X5);
+			circular_truncated_cone cir_trun_con1(x11, y11, r1, height, x22, y22, x44);
+			if (cir_trun_con1.judge4())
+			{
+				result.Format(_T("圆台的面积为%f%s"), cir_trun_con1.area(), area_unit(n2));
+			}
+			else
+			{
+				MessageBox(_T("所输入的信息构不成圆台"), _T("警告"), MB_OK);
+			}
+		}
+		else
+		{
+			MessageBox(_T("请输入两位小数的数字"), _T("警告"), MB_OK);
+		}
+		break;
+	}
 	}
 	// TODO: 在此添加控件通知处理程序代码
 }
@@ -1027,4 +1744,56 @@ void CcalgraphyDlg::OnEnChangeEdit7()
 	// 同时将 ENM_CHANGE 标志“或”运算到掩码中。
 
 	// TODO:  在此添加控件通知处理程序代码
+}
+CString CcalgraphyDlg::area_unit(int n)
+{
+	CString unit;
+	switch (n)
+	{
+	case 0:
+		unit = "平方厘米";
+		break;
+	case 1:
+		unit = "平方毫米";
+		break;
+	case 2:
+		unit = "平方米";
+		break;
+	}
+	return unit;
+}
+CString CcalgraphyDlg::volume_unit(int n)
+{
+	CString unit;
+	switch (n)
+	{
+	case 0:
+		unit = "立方厘米";
+		break;
+	case 1:
+		unit = "立方毫米";
+		break;
+	case 2:
+		unit = "立方米";
+		break;
+	}
+	return unit;
+}
+CString CcalgraphyDlg::length_unit(int n)
+{
+	CString unit;
+	switch (n)
+	{
+	case 0:
+		unit = "厘米";
+		break;
+	case 1:
+		unit = "毫米";
+		break;
+	case 2:
+		unit = "米";
+		break;
+	}
+	return unit;
+
 }
