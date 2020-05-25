@@ -1055,9 +1055,10 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			x44 = _ttof(X4);
 			height = _ttof(X5);
 			circular_truncated_cone cir_trun_con1(x11, y11, r1, height, x22, y22, x44);
-			if (cir_trun_con1.judge4())
+			if (x11==x22&&y11==y22)
 			{
 				result.Format(_T("圆台的体积为%f%s"), cir_trun_con1.volume(), volume_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
 			}
 			else
 			{
@@ -1516,9 +1517,10 @@ void CcalgraphyDlg::OnBnClickedButton8()
 			x44 = _ttof(X4);
 			height = _ttof(X5);
 			circular_truncated_cone cir_trun_con1(x11, y11, r1, height, x22, y22, x44);
-			if (cir_trun_con1.judge4())
+			if (x11==x22&&y11==y22)
 			{
 				result.Format(_T("圆台的面积为%f%s"), cir_trun_con1.area(), area_unit(n2));
+				SetDlgItemText(IDC_EDIT1, result);
 			}
 			else
 			{

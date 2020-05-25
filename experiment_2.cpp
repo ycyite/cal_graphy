@@ -471,10 +471,4 @@ double Circle::volume()const
 {
 	return 0;
 }
-bool circular_truncated_cone::judge4()
-{
-	if ((x == x12) && (y == y12))
-		return true;
-	else
-		return false;
-}
+

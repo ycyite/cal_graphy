@@ -194,9 +194,8 @@ public:
 	circular_truncated_cone(double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0);
 	virtual double area()const;
 	virtual double volume()const;
-	bool judge4();
 	~circular_truncated_cone();
-protected:
+private:
 	double radius1;
 	double x12;
 	double y12;
