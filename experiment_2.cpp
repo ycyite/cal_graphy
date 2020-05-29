@@ -190,7 +190,7 @@ parallelogram::parallelogram(double a1, double b1, double a2, double b2, double 
 }
 bool parallelogram::judge()
 {
-	if ((x - x1) == (x6 - x7) && (y - y1) == (y6 - y7))
+	if ((x - x1)*(y6 - y7)==(x6-x7)*(y-y1))
 		return true;
 	else
 		return false;

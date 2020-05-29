@@ -2,6 +2,8 @@
 // Microsoft Visual C++ 生成的包含文件。
 // 供 calgraphy.rc 使用
 //
+#define IDOK                            1
+#define IDC_INPUTBOX                    9
 #define IDM_ABOUTBOX                    0x0010
 #define IDD_ABOUTBOX                    100
 #define IDS_ABOUTBOX                    101
@@ -47,14 +49,16 @@
 #define IDC_P8                          1046
 #define IDC_P9                          1047
 #define IDC_P10                         1048
+#define IDC_COMBO4                      1050
+#define IDC_BUTTON2                     1051
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        132
+#define _APS_NEXT_RESOURCE_VALUE        134
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1049
+#define _APS_NEXT_CONTROL_VALUE         1052
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

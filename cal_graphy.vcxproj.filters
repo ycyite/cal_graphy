@@ -48,6 +48,9 @@
     <ClInclude Include="experiment_2.h">
       <Filter>头文件\系统内部</Filter>
     </ClInclude>
+    <ClInclude Include="inputbox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cal_graphy.cpp">
@@ -61,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="experiment_2.cpp">
       <Filter>源文件\系统内部</Filter>
+    </ClCompile>
+    <ClCompile Include="inputbox.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

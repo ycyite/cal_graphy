@@ -8,6 +8,9 @@
 #include "cal_graphyDlg.h"
 #include "afxdialogex.h"
 #include"experiment_2.h"
+#include"inputbox.h"
+#include<fstream>
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -52,7 +55,9 @@ CString unit1=_T("");
 int n1;
 int n2;
 int n3;
-
+inputbox box1;
+CString filename = _T("");
+CString result = _T("");
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
 class CAboutDlg : public CDialogEx
@@ -147,6 +152,8 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_EN_CHANGE(IDC_EDIT14, &CcalgraphyDlg::OnEnChangeEdit14)
 	ON_EN_CHANGE(IDC_EDIT16, &CcalgraphyDlg::OnEnChangeEdit16)
 	ON_EN_CHANGE(IDC_EDIT7, &CcalgraphyDlg::OnEnChangeEdit7)
+	ON_BN_CLICKED(IDC_BUTTON5, &CcalgraphyDlg::OnBnClickedButton5)
+	ON_CBN_SELCHANGE(IDC_COMBO4, &CcalgraphyDlg::OnCbnSelchangeCombo4)
 END_MESSAGE_MAP()
 
 
@@ -159,7 +166,7 @@ BOOL CcalgraphyDlg::OnInitDialog()
 	// 将“关于...”菜单项添加到系统菜单中。
 	// IDM_ABOUTBOX 必须在系统命令范围内。
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
-	ASSERT(IDM_ABOUTBOX < 0xF000);
+	ASSERT(IDM_ABOUTBOX< 0xF000);
 
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
 	if (pSysMenu != nullptr)
@@ -1799,3 +1806,53 @@ CString CcalgraphyDlg::length_unit(int n)
 	return unit;
 
 }
+
+void CcalgraphyDlg::OnBnClickedButton5()
+{
+	CString result = _T("");
+	show_result.GetWindowTextW(result);
+	if (result == _T(""))
+	{
+		MessageBox(_T("请计算出结果，再进行存档"), _T("警告"), MB_OK);
+	}
+	else
+	{
+		box1.DoModal();
+	}
+	
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CcalgraphyDlg::OnCbnSelchangeCombo4()
+{
+	
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+void inputbox::OnBnClickedButton1()
+{
+	file_name.GetWindowTextW(filename);
+	if (filename == _T(""))
+	{
+		MessageBox(_T("请输入存档名"), _T("警告"), MB_OK);
+	}
+	else
+	{
+		CString inpath = _T("");
+		inpath.Format(_T("E:\\c++\\项目\\存档\\%s.txt"), filename);
+		ofstream outfile(inpath, ios::out);
+		
+		outfile.close();
+
+	}
+	// TODO: 在此添加控件通知处理程序代码
+}
+void inputbox::OnBnClickedButton3()
+{
+	CDialog::OnOK();
+	EndDialog(1);
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
