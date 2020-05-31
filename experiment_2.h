@@ -101,7 +101,8 @@ public:
 	parallelogram(double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0, double = 0);//声明构造函数
 	virtual double length()const;//声明求周长的虚函数,返还周长的数值
 	virtual double area()const;//声明求面积的虚函数，返还面积的数值
-	bool judge();//声明判断是否构成平行四边形的函数，如果是则返还真值，如果不是则返还假
+	bool judge(double, double, double, double, double, double, double, double);//声明判断是否构成平行四边形的函数，如果是则返还真值，如果不是则返还假
+	bool judge4();
 	~parallelogram();//定义析构函数
 };
 class rectangular_pyramid :public parallelogram//四棱锥

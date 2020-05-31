@@ -620,7 +620,7 @@ void CcalgraphyDlg::OnBnClickedButton1()
 				x44 = _ttof(X4);
 				y44 = _ttof(Y4);
 				parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
-				if (pall.judge())
+				if (pall.judge4())
 				{
 					switch (n2)
 					{
@@ -1117,7 +1117,7 @@ void CcalgraphyDlg::OnBnClickedButton8()
 				x44 = _ttof(X4);
 				y44 = _ttof(Y4);
 				parallelogram pall(x11, y11, x22, y22, x33, y33, x44, y44);
-				if (pall.judge())
+				if (pall.judge4())
 				{
 					result.Format(_T("平行四边形周长为%f%s"), pall.length(), length_unit(n2));
 					SetDlgItemText(IDC_EDIT1, result);
