@@ -188,19 +188,46 @@ parallelogram::parallelogram(double a1, double b1, double a2, double b2, double 
 	x7 = a4;
 	y7 = b4;
 }
-bool parallelogram::judge()
+bool parallelogram::judge(double a, double b, double c, double d, double e, double f, double g, double h)
 {
-	if ((x - x1)*(y6 - y7)==(x6-x7)*(y-y1))
+	if (((a == c == e) && (e == g) && (fabs(b - d) == fabs(f - h))) || ((b == d == f) && (f == h) && (fabs(a - c) == fabs(e - g))))
+		return true;
+	else
+		return false;
+}
+bool parallelogram::judge4()
+{
+	if (judge(x, y, x1, y1, x6, y6, x7, y7) || judge(x, y, x1, y1, x7, y7, x6, y6) || judge(x, y, x6, y6, x1, y1, x7, y7) || judge(x, y, x6, y6, x7, y7, x1, y1) || judge(x, y, x7, y7, x1, y1, x6, y6) || judge(x, y, x7, y7, x6, y6, x1, y1))
 		return true;
 	else
 		return false;
 }
 double parallelogram::length()const
 {
-	double a, b;
+	
+	double a, b,c,d_x,e_x,f_x,d_y,e_y,f_y;
 	a = sqrt(pow((x - x1), 2) + pow((y - y1), 2));
-	b = sqrt(pow((x1 - x7), 2) + pow((y1 - y7), 2));
-	return (a + b) * 2;
+	b = sqrt(pow((x - x7), 2) + pow((y - y7), 2));
+	c= sqrt(pow((x - x6), 2) + pow((y - y6), 2));
+	d_x = x - x1;
+	e_x = x - x7;
+	f_x= x - x6;
+	d_y = y - y1;
+	e_y = y - y7;
+	f_y = y - y6;
+	if (d_x + e_x== f_x&&d_y+e_y==f_y)
+	{
+		return (a + b) * 2;
+	}
+	else if (e_x+ f_x== d_x&&e_y+f_y==d_y)
+	{
+		return(b + c) * 2;
+	}
+	else if (d_x+ f_x== e_x&&d_y+f_y==e_y)
+	{
+		return(a + c) * 2;
+	}
+	//通过向量的方法来求周长
 }
 double parallelogram::area()const
 {
