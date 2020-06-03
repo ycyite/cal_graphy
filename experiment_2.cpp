@@ -11,14 +11,7 @@ Point::Point(double a, double b)
 Point::~Point()
 {
 }
-inline void Point::setX(double a)
-{
-	x = a;
-}
-inline void Point::setY(double b)
-{
-	y = b;
-}
+
 line::line(double q, double w, double e, double r) :Point(q, w)
 {
 	x1 = e;
