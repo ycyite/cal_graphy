@@ -10,7 +10,7 @@
 #include"experiment_2.h"
 #include"inputbox.h"
 #include<fstream>
-
+#include"save.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -58,6 +58,7 @@ int n3;
 inputbox box1;
 CString filename = _T("");
 CString result = _T("");
+SaveFile save1;
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
 class CAboutDlg : public CDialogEx
@@ -125,6 +126,8 @@ void CcalgraphyDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT16, x_8);
 	DDX_Control(pDX, IDC_EDIT17, y_8);
 	DDX_Control(pDX, IDC_EDIT18, x_9);
+	DDX_Control(pDX, IDC_DATE, m_saveFile);
+	DDX_Control(pDX, IDC_IMFOR, m_saveData);
 }
 
 BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
@@ -154,6 +157,9 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_EN_CHANGE(IDC_EDIT7, &CcalgraphyDlg::OnEnChangeEdit7)
 	ON_BN_CLICKED(IDC_BUTTON5, &CcalgraphyDlg::OnBnClickedButton5)
 	ON_CBN_SELCHANGE(IDC_COMBO4, &CcalgraphyDlg::OnCbnSelchangeCombo4)
+	ON_BN_CLICKED(IDC_LOAD, &CcalgraphyDlg::OnBnClickedLoad)
+	ON_CBN_SELCHANGE(IDC_DATE, &CcalgraphyDlg::OnCbnSelchangeDate)
+	ON_CBN_SELCHANGE(IDC_IMFOR, &CcalgraphyDlg::OnCbnSelchangeImfor)
 END_MESSAGE_MAP()
 
 
@@ -215,6 +221,18 @@ BOOL CcalgraphyDlg::OnInitDialog()
 	GetClientRect(&rc);
 	rgnTmp.CreateRoundRectRgn(rc.left + 3, rc.top + 3, rc.right - rc.left - 3, rc.bottom - rc.top - 3, 6, 6);
 	SetWindowRgn(rgnTmp, TRUE);
+
+
+	//初始化存档
+	/*SaveFile saveFile;
+	CString intro = saveFile.returnNum();
+	for (int i = 0; i < 100; i++)
+	{
+		if (saveFile.dateList[i]==_T(""))break;
+		m_saveFile.AddString(saveFile.dateList[i]);
+	}*/
+	
+	//show_result.SetWindowTextW(intro);
 
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
@@ -499,7 +517,24 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 		}
 
 	}
-	// TODO: 在此添加控件通知处理程序代码
+	//清空
+	m_saveFile.ResetContent();
+	
+	//获得图形
+	CString shape = _T("");
+	combox1.GetLBText(combox1.GetCurSel(), shape);
+	save1.readPath(shape);
+
+	//读取纪录并插入
+	int i=0;
+	CString str = save1.returnFile(i);
+	while (str!=_T(""))
+	{
+		m_saveFile.InsertString(i,str);
+		i++;
+		str = save1.returnFile(i);
+	}
+
 }
 
 
@@ -1809,6 +1844,27 @@ CString CcalgraphyDlg::length_unit(int n)
 
 void CcalgraphyDlg::OnBnClickedButton5()
 {
+	
+	//形状
+	CString shape = _T("");
+	combox1.GetLBText(combox1.GetCurSel(),shape);
+	
+	//获取字符串
+	CString info = _T("");
+	CString str;
+	x_1.GetWindowTextW(str);
+	info += str;
+	info += _T(",");
+	y_1.GetWindowTextW(str);
+	info += str;
+	info += _T(",");
+	x_2.GetWindowTextW(str);
+	info += str;
+	info += _T(",");
+	save1.writeFile(shape,info);
+
+
+	/*
 	CString result = _T("");
 	show_result.GetWindowTextW(result);
 	if (result == _T(""))
@@ -1819,8 +1875,10 @@ void CcalgraphyDlg::OnBnClickedButton5()
 	{
 		box1.DoModal();
 	}
-	
-	// TODO: 在此添加控件通知处理程序代码
+	SaveFile saveFile;
+	saveFile.writeFile(_T("hahahhhhhhhh"));
+	*/
+	//获取系统时间 　
 }
 
 
@@ -1856,3 +1914,53 @@ void inputbox::OnBnClickedButton3()
 }
 
 
+
+
+void CcalgraphyDlg::OnBnClickedLoad()
+{
+	CString str = save1.returnSplitStr(0);
+	x_1.SetWindowTextW(str);
+	str = save1.returnSplitStr(1);
+	y_1.SetWindowTextW(str);
+	str = save1.returnSplitStr(2);
+	x_2.SetWindowTextW(str);
+}
+
+
+void CcalgraphyDlg::OnCbnSelchangeDate()
+{
+	//清空
+	m_saveData.ResetContent();
+
+	//获得图形
+	CString shape = _T("");
+	combox1.GetLBText(combox1.GetCurSel(), shape);
+	//获得日期(选中)
+	CString date = _T("");
+	m_saveFile.GetLBText(m_saveFile.GetCurSel(), date);
+
+	//读入文件
+	save1.readFile(shape,date);
+
+	//读取纪录并插入
+	int i = 0;
+	CString str = save1.returnData(i);
+	while (str != _T(""))
+	{
+		m_saveData.InsertString(i, str);
+		i++;
+		str = save1.returnData(i);
+	}
+}
+
+
+void CcalgraphyDlg::OnCbnSelchangeImfor()
+{
+	//现在选择项
+	CString fullStr;
+	m_saveData.GetLBText(m_saveData.GetCurSel(),fullStr);
+
+	//切割这个存档信息
+	save1.readData(fullStr);
+
+}
