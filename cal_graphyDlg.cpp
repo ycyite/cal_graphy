@@ -156,7 +156,6 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_EN_CHANGE(IDC_EDIT16, &CcalgraphyDlg::OnEnChangeEdit16)
 	ON_EN_CHANGE(IDC_EDIT7, &CcalgraphyDlg::OnEnChangeEdit7)
 	ON_BN_CLICKED(IDC_BUTTON5, &CcalgraphyDlg::OnBnClickedButton5)
-	ON_CBN_SELCHANGE(IDC_COMBO4, &CcalgraphyDlg::OnCbnSelchangeCombo4)
 	ON_BN_CLICKED(IDC_LOAD, &CcalgraphyDlg::OnBnClickedLoad)
 	ON_CBN_SELCHANGE(IDC_DATE, &CcalgraphyDlg::OnCbnSelchangeDate)
 	ON_CBN_SELCHANGE(IDC_IMFOR, &CcalgraphyDlg::OnCbnSelchangeImfor)
@@ -1879,13 +1878,6 @@ void CcalgraphyDlg::OnBnClickedButton5()
 	saveFile.writeFile(_T("hahahhhhhhhh"));
 	*/
 	//获取系统时间 　
-}
-
-
-void CcalgraphyDlg::OnCbnSelchangeCombo4()
-{
-	
-	// TODO: 在此添加控件通知处理程序代码
 }
 
 void inputbox::OnBnClickedButton1()
