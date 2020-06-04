@@ -89,5 +89,6 @@ public:
 	afx_msg void OnCbnSelchangeDate();
 	CComboBox m_saveData;
 	afx_msg void OnCbnSelchangeImfor();
+	void  initSaveFile();
 };
 

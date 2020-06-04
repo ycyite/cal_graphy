@@ -45,6 +45,9 @@ int SaveFile::readPath(CString shape)
 	CString path = filePath + shape;
 	CreateDirectory((LPCTSTR)path, NULL);
 
+	//初始化文件
+	readFile(shape,today());
+
 	fileList = new CString[100];
 	//找个数
 	CFileFind find;
