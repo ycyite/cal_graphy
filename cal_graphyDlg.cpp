@@ -269,7 +269,7 @@ HCURSOR CcalgraphyDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
-
+//初始化存档数据
 void  CcalgraphyDlg::initSaveFile()
 {
 	//清空

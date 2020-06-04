@@ -25,31 +25,33 @@ CString SaveFile::today()
 
 void SaveFile::writeFile(CString shape, CString info)
 {
+	//完整路径
 	CString path = filePath + shape + _T("/") + today();
 
+	//准备字串
 	CString str;
 	str =  info + _T("\n");
 
+	//写入字串
 	CStdioFile file;
 	file.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::modeNoTruncate);
 	file.SeekToEnd();
 	file.WriteString(str);
-
-	//Write( const void* lpBuf, UINT nCount )  lpBuf是写入数据的Buf指针，nCount是Buf里需要写入文件的字节数
 
 	file.Close();
 }
 
 int SaveFile::readPath(CString shape)
 {
+	//文件夹路径，如果没有则创建
 	CString path = filePath + shape;
 	CreateDirectory((LPCTSTR)path, NULL);
 
-	//初始化文件
+	//如果没有今天的文件则创建
 	readFile(shape,today());
 
 	fileList = new CString[100];
-	//找个数
+	//读取文件夹下文件个数
 	CFileFind find;
 	bool ret = find.FindFile(path + _T("/*.*"));  //所有文件                 
 	int fileNum = 0;
@@ -58,6 +60,7 @@ int SaveFile::readPath(CString shape)
 		ret = find.FindNextFile();
 		if (find.IsDots() || find.IsDirectory())
 			continue;
+		//读到的文件名放入列表
 		fileList[fileNum] = find.GetFileName();
 		fileNum++;
 	}
@@ -70,11 +73,14 @@ CString SaveFile::returnFile(int index)
 }
 void SaveFile::readFile(CString shape,CString date)
 {
+	//完整路径
 	CString path = filePath + shape + _T("/") + date;
 
 	thisFile = new CString[100];
+	//按行读入的中介
 	CString midStr;
 
+	//按行读入
 	CStdioFile file;
 	file.Open(path, CFile::modeCreate | CFile::modeRead | CFile::modeNoTruncate);
 	file.SeekToBegin();
@@ -94,7 +100,9 @@ CString SaveFile::returnData(int index)
 void SaveFile::readData(CString fullStr)
 {
 	strList = new CString[17];
+	//分割中介
 	CString str;
+	//分割存进数组
 	for (int i=0;i<17;i++)
 	{
 		if (AfxExtractSubString(str, (LPCTSTR)fullStr, i, ','))
