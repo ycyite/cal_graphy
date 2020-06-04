@@ -64,7 +64,6 @@ int SaveFile::readPath(CString shape)
 		fileList[fileNum] = find.GetFileName();
 		fileNum++;
 	}
-
 	return fileNum;
 }
 CString SaveFile::returnFile(int index)

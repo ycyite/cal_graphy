@@ -289,8 +289,9 @@ void  CcalgraphyDlg::initSaveFile()
 		i++;
 		str = save1.returnFile(i);
 	}
-
+	//选择最后一项
 	m_saveFile.SetCurSel(m_saveFile.GetCount() - 1);
+	//读取并选择最后一项
 	OnCbnSelchangeDate();
 }
 
@@ -1829,7 +1830,7 @@ CString CcalgraphyDlg::length_unit(int n)
 	return unit;
 
 }
-
+//存档
 void CcalgraphyDlg::OnBnClickedButton5()
 {
 	initSaveFile();
@@ -1872,7 +1873,7 @@ void CcalgraphyDlg::OnBnClickedButton5()
 	}
 	//写入存档信息
 	save1.writeFile(shape, info);
-
+	//刷新
 	initSaveFile();
 }
 
@@ -1903,14 +1904,14 @@ void inputbox::OnBnClickedButton3()
 
 
 
-
+//读档
 void CcalgraphyDlg::OnBnClickedLoad()
 {
 	CString str;
 	CEdit* editer;
-
 	for (int i=0;i<17;i++)
 	{
+		//分割字串为单个数据
 		str = save1.returnSplitStr(i);
 		switch (i)
 		{
@@ -1933,12 +1934,12 @@ void CcalgraphyDlg::OnBnClickedLoad()
 		case 16:editer = &x_9; break;
 		default:editer = &x_1;
 		}
+		//将数值分别设置到编辑框内
 		editer->SetWindowTextW(str);
 	}
-
 }
 
-
+//刷新读取存档文件
 void CcalgraphyDlg::OnCbnSelchangeDate()
 {
 	//清空
@@ -1963,7 +1964,7 @@ void CcalgraphyDlg::OnCbnSelchangeDate()
 		i++;
 		str = save1.returnData(i);
 	}
-
+	//选择最后一项
 	m_saveData.SetCurSel(m_saveData.GetCount() - 1);
 }
 
