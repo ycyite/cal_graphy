@@ -156,7 +156,6 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_EN_CHANGE(IDC_EDIT16, &CcalgraphyDlg::OnEnChangeEdit16)
 	ON_EN_CHANGE(IDC_EDIT7, &CcalgraphyDlg::OnEnChangeEdit7)
 	ON_BN_CLICKED(IDC_BUTTON5, &CcalgraphyDlg::OnBnClickedButton5)
-	ON_CBN_SELCHANGE(IDC_COMBO4, &CcalgraphyDlg::OnCbnSelchangeCombo4)
 	ON_BN_CLICKED(IDC_LOAD, &CcalgraphyDlg::OnBnClickedLoad)
 	ON_CBN_SELCHANGE(IDC_DATE, &CcalgraphyDlg::OnCbnSelchangeDate)
 	ON_CBN_SELCHANGE(IDC_IMFOR, &CcalgraphyDlg::OnCbnSelchangeImfor)
@@ -201,39 +200,23 @@ BOOL CcalgraphyDlg::OnInitDialog()
 	combox2.InsertString(0, _T("二维"));
 	combox2.InsertString(1, _T("三维"));
 
-	//
-	CString strBmpPath = _T(".\\res\\back.png");
-
+	//读取图片背景
+	CString strBmpPath = _T(".\\res\\back.bmp");
 	CImage img;
-
 	img.Load(strBmpPath);
 
+	//设置窗口基本属性
 	MoveWindow(0, 0, img.GetWidth(), img.GetHeight());
-
 	CBitmap bmpTmp;
-
 	bmpTmp.Attach(img.Detach());
-
 	m_bkBrush.CreatePatternBrush(&bmpTmp);
-	//
+
+	//将窗口切成圆角矩形
 	CRgn rgnTmp;
 	RECT rc;
 	GetClientRect(&rc);
 	rgnTmp.CreateRoundRectRgn(rc.left + 3, rc.top + 3, rc.right - rc.left - 3, rc.bottom - rc.top - 3, 6, 6);
 	SetWindowRgn(rgnTmp, TRUE);
-
-
-	//初始化存档
-	/*SaveFile saveFile;
-	CString intro = saveFile.returnNum();
-	for (int i = 0; i < 100; i++)
-	{
-		if (saveFile.dateList[i]==_T(""))break;
-		m_saveFile.AddString(saveFile.dateList[i]);
-	}*/
-	
-	//show_result.SetWindowTextW(intro);
-
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -286,8 +269,31 @@ HCURSOR CcalgraphyDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
+//初始化存档数据
+void  CcalgraphyDlg::initSaveFile()
+{
+	//清空
+	m_saveFile.ResetContent();
 
+	//获得图形
+	CString shape = _T("");
+	combox1.GetLBText(combox1.GetCurSel(), shape);
+	save1.readPath(shape);
 
+	//读取纪录并插入
+	int i = 0;
+	CString str = save1.returnFile(i);
+	while (str != _T(""))
+	{
+		m_saveFile.InsertString(i, str);
+		i++;
+		str = save1.returnFile(i);
+	}
+	//选择最后一项
+	m_saveFile.SetCurSel(m_saveFile.GetCount() - 1);
+	//读取并选择最后一项
+	OnCbnSelchangeDate();
+}
 
 void CcalgraphyDlg::OnCbnSelchangeCombo1()
 {
@@ -517,24 +523,7 @@ void CcalgraphyDlg::OnCbnSelchangeCombo1()
 		}
 
 	}
-	//清空
-	m_saveFile.ResetContent();
-	
-	//获得图形
-	CString shape = _T("");
-	combox1.GetLBText(combox1.GetCurSel(), shape);
-	save1.readPath(shape);
-
-	//读取纪录并插入
-	int i=0;
-	CString str = save1.returnFile(i);
-	while (str!=_T(""))
-	{
-		m_saveFile.InsertString(i,str);
-		i++;
-		str = save1.returnFile(i);
-	}
-
+	initSaveFile();
 }
 
 
@@ -1841,10 +1830,10 @@ CString CcalgraphyDlg::length_unit(int n)
 	return unit;
 
 }
-
+//存档
 void CcalgraphyDlg::OnBnClickedButton5()
 {
-	
+	initSaveFile();
 	//形状
 	CString shape = _T("");
 	combox1.GetLBText(combox1.GetCurSel(),shape);
@@ -1852,40 +1841,40 @@ void CcalgraphyDlg::OnBnClickedButton5()
 	//获取字符串
 	CString info = _T("");
 	CString str;
-	x_1.GetWindowTextW(str);
-	info += str;
-	info += _T(",");
-	y_1.GetWindowTextW(str);
-	info += str;
-	info += _T(",");
-	x_2.GetWindowTextW(str);
-	info += str;
-	info += _T(",");
-	save1.writeFile(shape,info);
+	CEdit* editer;
 
-
-	/*
-	CString result = _T("");
-	show_result.GetWindowTextW(result);
-	if (result == _T(""))
+	//逐步添加
+	for (int i=0;i<17;i++)
 	{
-		MessageBox(_T("请计算出结果，再进行存档"), _T("警告"), MB_OK);
+		switch (i)
+		{
+		case 0: editer = &x_1; break;
+		case 1: editer = &y_1; break;
+		case 2: editer = &x_2; break;
+		case 3: editer = &y_2; break;
+		case 4: editer = &x_3; break;
+		case 5: editer = &y_3; break;
+		case 6: editer = &x_4; break;
+		case 7: editer = &y_4; break;
+		case 8: editer = &x_5; break;
+		case 9: editer = &y_5; break;
+		case 10:editer = &x_6; break;
+		case 11:editer = &y_6; break;
+		case 12:editer = &x_7; break;
+		case 13:editer = &y_7; break;
+		case 14:editer = &x_8; break;
+		case 15:editer = &y_8; break;
+		case 16:editer = &x_9; break;
+		default:editer = &x_1;
+		}
+		editer->GetWindowTextW(str);
+		info += str;
+		info += _T(",");
 	}
-	else
-	{
-		box1.DoModal();
-	}
-	SaveFile saveFile;
-	saveFile.writeFile(_T("hahahhhhhhhh"));
-	*/
-	//获取系统时间 　
-}
-
-
-void CcalgraphyDlg::OnCbnSelchangeCombo4()
-{
-	
-	// TODO: 在此添加控件通知处理程序代码
+	//写入存档信息
+	save1.writeFile(shape, info);
+	//刷新
+	initSaveFile();
 }
 
 void inputbox::OnBnClickedButton1()
@@ -1915,18 +1904,42 @@ void inputbox::OnBnClickedButton3()
 
 
 
-
+//读档
 void CcalgraphyDlg::OnBnClickedLoad()
 {
-	CString str = save1.returnSplitStr(0);
-	x_1.SetWindowTextW(str);
-	str = save1.returnSplitStr(1);
-	y_1.SetWindowTextW(str);
-	str = save1.returnSplitStr(2);
-	x_2.SetWindowTextW(str);
+	CString str;
+	CEdit* editer;
+	for (int i=0;i<17;i++)
+	{
+		//分割字串为单个数据
+		str = save1.returnSplitStr(i);
+		switch (i)
+		{
+		case 0: editer = &x_1; break;
+		case 1: editer = &y_1; break;
+		case 2: editer = &x_2; break;
+		case 3: editer = &y_2; break;
+		case 4: editer = &x_3; break;
+		case 5: editer = &y_3; break;
+		case 6: editer = &x_4; break;
+		case 7: editer = &y_4; break;
+		case 8: editer = &x_5; break;
+		case 9: editer = &y_5; break;
+		case 10:editer = &x_6; break;
+		case 11:editer = &y_6; break;
+		case 12:editer = &x_7; break;
+		case 13:editer = &y_7; break;
+		case 14:editer = &x_8; break;
+		case 15:editer = &y_8; break;
+		case 16:editer = &x_9; break;
+		default:editer = &x_1;
+		}
+		//将数值分别设置到编辑框内
+		editer->SetWindowTextW(str);
+	}
 }
 
-
+//刷新读取存档文件
 void CcalgraphyDlg::OnCbnSelchangeDate()
 {
 	//清空
@@ -1951,6 +1964,8 @@ void CcalgraphyDlg::OnCbnSelchangeDate()
 		i++;
 		str = save1.returnData(i);
 	}
+	//选择最后一项
+	m_saveData.SetCurSel(m_saveData.GetCount() - 1);
 }
 
 

@@ -84,11 +84,11 @@ public:
 	CEdit x_9;
 	afx_msg void OnEnChangeEdit7();
 	afx_msg void OnBnClickedButton5();
-	afx_msg void OnCbnSelchangeCombo4();
 	afx_msg void OnBnClickedLoad();
 	CComboBox m_saveFile;
 	afx_msg void OnCbnSelchangeDate();
 	CComboBox m_saveData;
 	afx_msg void OnCbnSelchangeImfor();
+	void  initSaveFile();
 };
 
