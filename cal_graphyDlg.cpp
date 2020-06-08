@@ -8,7 +8,6 @@
 #include "cal_graphyDlg.h"
 #include "afxdialogex.h"
 #include"experiment_2.h"
-#include"inputbox.h"
 #include<fstream>
 #include"save.h"
 
@@ -55,7 +54,6 @@ CString unit1=_T("");
 int n1;
 int n2;
 int n3;
-inputbox box1;
 CString filename = _T("");
 CString result = _T("");
 SaveFile save1;
@@ -159,6 +157,8 @@ BEGIN_MESSAGE_MAP(CcalgraphyDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_LOAD, &CcalgraphyDlg::OnBnClickedLoad)
 	ON_CBN_SELCHANGE(IDC_DATE, &CcalgraphyDlg::OnCbnSelchangeDate)
 	ON_CBN_SELCHANGE(IDC_IMFOR, &CcalgraphyDlg::OnCbnSelchangeImfor)
+	ON_EN_CHANGE(IDC_EDIT3, &CcalgraphyDlg::OnEnChangeEdit3)
+	ON_STN_CLICKED(IDC_P8, &CcalgraphyDlg::OnStnClickedP8)
 END_MESSAGE_MAP()
 
 
@@ -1056,7 +1056,7 @@ void CcalgraphyDlg::OnBnClickedButton1()
 			r1 = _ttof(X2);
 			height = _ttof(X3);
 			cone con1(x11, y11, r1, height);
-			result.Format(_T("圆柱的面积为%f%s"), con1.volume(), volume_unit(n2));
+			result.Format(_T("圆锥的面积为%f%s"), con1.volume(), volume_unit(n2));
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 		else
@@ -1518,7 +1518,7 @@ void CcalgraphyDlg::OnBnClickedButton8()
 			r1 = _ttof(X2);
 			height = _ttof(X3);
 			cone con1(x11, y11, r1, height);
-			result.Format(_T("圆柱的面积为%f%s"),con1.area(),area_unit(n2));
+			result.Format(_T("圆锥的面积为%f%s"),con1.area(),area_unit(n2));
 			SetDlgItemText(IDC_EDIT1, result);
 		}
 		else
@@ -1877,30 +1877,8 @@ void CcalgraphyDlg::OnBnClickedButton5()
 	initSaveFile();
 }
 
-void inputbox::OnBnClickedButton1()
-{
-	file_name.GetWindowTextW(filename);
-	if (filename == _T(""))
-	{
-		MessageBox(_T("请输入存档名"), _T("警告"), MB_OK);
-	}
-	else
-	{
-		CString inpath = _T("");
-		inpath.Format(_T("E:\\c++\\项目\\存档\\%s.txt"), filename);
-		ofstream outfile(inpath, ios::out);
-		
-		outfile.close();
 
-	}
-	// TODO: 在此添加控件通知处理程序代码
-}
-void inputbox::OnBnClickedButton3()
-{
-	CDialog::OnOK();
-	EndDialog(1);
-	// TODO: 在此添加控件通知处理程序代码
-}
+
 
 
 
@@ -1978,4 +1956,21 @@ void CcalgraphyDlg::OnCbnSelchangeImfor()
 	//切割这个存档信息
 	save1.readData(fullStr);
 
+}
+
+
+void CcalgraphyDlg::OnEnChangeEdit3()
+{
+	// TODO:  如果该控件是 RICHEDIT 控件，它将不
+	// 发送此通知，除非重写 CDialogEx::OnInitDialog()
+	// 函数并调用 CRichEditCtrl().SetEventMask()，
+	// 同时将 ENM_CHANGE 标志“或”运算到掩码中。
+
+	// TODO:  在此添加控件通知处理程序代码
+}
+
+
+void CcalgraphyDlg::OnStnClickedP8()
+{
+	// TODO: 在此添加控件通知处理程序代码
 }

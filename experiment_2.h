@@ -14,16 +14,6 @@ class Point//定义Shape的派生类Point
 {
 public:
 	Point(double = 0, double = 0);//定义构造函数
-	double getX()const
-	{
-		return x;
-	}//获取X坐标的函数
-	double getY()const
-	{
-		return y;
-	}//获取Y坐标的函数
-	void setX(double);
-	void setY(double);
 	~Point();//定义析构函数
 	double x;
 	double y;

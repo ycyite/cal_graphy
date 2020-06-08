@@ -11,14 +11,7 @@ Point::Point(double a, double b)
 Point::~Point()
 {
 }
-inline void Point::setX(double a)
-{
-	x = a;
-}
-inline void Point::setY(double b)
-{
-	y = b;
-}
+
 line::line(double q, double w, double e, double r) :Point(q, w)
 {
 	x1 = e;
@@ -190,7 +183,7 @@ parallelogram::parallelogram(double a1, double b1, double a2, double b2, double 
 }
 bool parallelogram::judge(double a, double b, double c, double d, double e, double f, double g, double h)
 {
-	if (((a == c == e) && (e == g) && (fabs(b - d) == fabs(f - h))) || ((b == d == f) && (f == h) && (fabs(a - c) == fabs(e - g))))
+	if ((b-h)*(c-e)==(a-g)*(d-f))
 		return true;
 	else
 		return false;
@@ -244,7 +237,7 @@ parallelogram::~parallelogram()
 }
 rectangular_pyramid::rectangular_pyramid(double a, double b, double c, double d, double e, double f, double g, double h, double k, double i, double j) :parallelogram(a, b, c, d, e, f, g, h)
 {
-	x8 = g;
+	x8 = i;
 	y8 = j;
 	h3 = k;
 }
@@ -452,7 +445,7 @@ double cone::area()const
 }
 double cone::volume()const
 {
-	return((1 / 3) * h5 * PI * pow(radius, 2));
+	return(( h5 * PI * pow(radius, 2))/3);
 }
 cone::~cone()
 {}
