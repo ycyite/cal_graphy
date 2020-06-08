@@ -90,5 +90,7 @@ public:
 	CComboBox m_saveData;
 	afx_msg void OnCbnSelchangeImfor();
 	void  initSaveFile();
+	afx_msg void OnEnChangeEdit3();
+	afx_msg void OnStnClickedP8();
 };
 

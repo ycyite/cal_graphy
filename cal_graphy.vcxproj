@@ -187,7 +187,6 @@
     <ClInclude Include="cal_graphyDlg.h" />
     <ClInclude Include="experiment_2.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="inputbox.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="save.h" />
@@ -197,7 +196,6 @@
     <ClCompile Include="cal_graphy.cpp" />
     <ClCompile Include="cal_graphyDlg.cpp" />
     <ClCompile Include="experiment_2.cpp" />
-    <ClCompile Include="inputbox.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -3,7 +3,6 @@
 // 供 calgraphy.rc 使用
 //
 #define IDOK                            1
-#define IDC_INPUTBOX                    9
 #define IDM_ABOUTBOX                    0x0010
 #define IDD_ABOUTBOX                    100
 #define IDS_ABOUTBOX                    101
@@ -26,7 +25,6 @@
 #define IDC_P2                          1019
 #define IDC_P3                          1020
 #define IDC_P4                          1021
-#define IDC_BUTTON3                     1022
 #define IDC_BUTTON4                     1023
 #define IDC_BUTTON5                     1024
 #define IDC_BUTTON6                     1025
